@@ -11,7 +11,7 @@
 \usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage{etoolbox}
-\usepackage[a4paper, total={6.5in, 10.5in}]{geometry}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[sc]{mathpazo}
 
@@ -24,6 +24,7 @@
 \date{\today}
 
 \pagestyle{fancyplain} 
+\renewcommand{\headrulewidth}{0pt}
 \cfoot{\thepage/\pageref{LastPage}}
 \lhead{}
 \chead{}
@@ -81,7 +82,46 @@ TBD
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
-TBD
+Sea $X_i = B(t - i + 1) - B(t - i)$, $1 \leq i \leq \floor{t}$. Por ser $B$ un
+movimiento browniano, se tiene que $X_1,\dots,X_{\floor{t}}$ son variables
+aleatorias iid con $X_i \sim N(0, (t - i + 1) - (t-i)) = N(0,1)$. Luego,
+valiéndonos de la Ley de los Grandes Números,
+
+$$\frac{1}{\floor{t}} \, \sum_{i = 1}^{\floor{t}}{X_i}
+    \stackrel{\textrm{c.s.}}{\longrightarrow} \textrm{E}[X_i] = 0$$
+
+cuando $t \rightarrow \infty$. A partir de la definición de $X_i$, tenemos:
+
+\begin{eqnarray*}
+    \frac{1}{\floor{t}} \, \sum_{i = 1}^{\floor{t}}{X_i} 
+    &=& \frac{1}{\floor{t}} \, \sum_{i = 1}^{\floor{t}}{B(t - i + 1) - B(t - i)} \\
+    &=& \frac{1}{\floor{t}} \, \left(B(t) - B(r)\right) \\
+    &=& \frac{B(t)}{\floor{t}} - \frac{B(r)}{\floor{t}} \\
+    &\stackrel{\textrm{c.s.}}{\longrightarrow}& 0
+\end{eqnarray*}
+
+con $r = t - \floor{t}$. Pero $0 \leq r < 1$, con lo cual
+$\frac{B(r)}{\floor{t}} \underset{t \to \infty}{\longrightarrow} 0$. 
+De esto se desprende que necesariamente
+$\frac{B(t)}{\floor{t}} \underset{t \to \infty}{\longrightarrow} 0$.
+A su vez, esto implica que
+$\left| \frac{B(t)}{\floor{t}} \right| =
+\frac{\left|B(t)\right|}{\floor{t}}
+\underset{t \to \infty}{\longrightarrow} 0$. Luego,
+$$0 \leq \frac{\left|B(t)\right|}{t} \leq 
+\frac{\left|B(t)\right|}{\floor{t}} \underset{t \to \infty}{\longrightarrow} 0$$
+
+Se ve entonces que 
+$\left| \frac{B(t)}{t} \right| =
+\frac{|B(t)|}{t} \underset{t \to \infty}{\longrightarrow} 0$, de lo que se
+puede concluir que $\frac{B(t)}{t} \underset{t \to \infty}{\longrightarrow} 0$,
+que es lo que se prentedía demostrar\footnote
+{Dada $f : \mathbb{R} \to \mathbb{R}$ tal que $|f(x)|
+\underset{x \to \infty}{\longrightarrow} 0$,
+$-|f(x)| \leq f(x) \leq |f(x)| \Rightarrow
+f(x) \underset{x \to \infty}{\longrightarrow} 0$.}.
+
+
 \end{proof}
 
 \end{document}
