@@ -1,2 +1,1 @@
-# mb
-Ejercicios de Movimiento Browniano
+Ejercicios entregables de [Movimiento Browniano](http://mate.dm.uba.ar/~pgroisma/movimientobrowniano.html).
