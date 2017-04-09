@@ -1,0 +1,87 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{lastpage}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage[a4paper, total={6.5in, 10.5in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+
+\newcommand{\at}{@}
+
+\title{Movimiento Browniano\\
+      \small{Ejercicios entregables - Semana 1}}
+\author{Lucio Santi\\
+        \texttt{lsanti\at dc.uba.ar}}
+\date{\today}
+
+\pagestyle{fancyplain} 
+\cfoot{\thepage/\pageref{LastPage}}
+\lhead{}
+\chead{}
+\rhead{}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\CT}{\ensuremath{C([0,T], \mathbb{R})}}
+\newcommand{\CTesp}{\ensuremath{(C([0,T], \mathbb{R}), \norm{\cdot}_{\infty})}}
+\newcommand{\Bor}[1]{\ensuremath{\mathcal{B}(#1)}}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+
+\newtheorem*{ej}{Ejercicio}
+
+\begin{document}
+\maketitle
+
+\begin{ej} 
+    Este ejercicio es para caracterizar la $\sigma$-álgebra de Borel
+    $\mathcal{B}$ en \CT.
+
+    \begin{enumerate}[a)]
+        \item Sea $(E,d)$ un espacio métrico separable y completo (polaco).
+        Probar que todo abierto $U \subset E$ se puede escribir como unión
+        numerable de bolas abiertas.
+        
+        \item Sea $(E,d)$ un espacio métrico polaco. Probar que existen 
+        numerables bolas $B_1, \dots, B_n, \dots$ tal que la $\sigma$-álgebra
+        de Borel \Bor{E} verifica
+        $$\Bor{E} = \sigma\left(\{B_n : n \in \mathbb{N} \}\right)$$
+
+        \item Para $\omega \in \CT$ definimos $\pi_t(\omega) = \omega(t)$.
+        Probar que $\pi_t : \CT \rightarrow \mathbb{R}$ es continua.\\
+
+        En \CTesp \, definimos la $\sigma$-álgebra de Kolmogorov,
+        $$\mathcal{K} = \sigma\left(\left\{\pi_{t}^{-1}(B) : t \in [0,T],
+        B \in \Bor{\mathbb{R}} \right\}\right)$$
+
+        \item Probar que las bolas abiertas están en $\mathcal{K}$.
+
+        \item Probar que $\mathcal{K} = \mathcal{B}$.
+    \end{enumerate}
+
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+TBD
+\end{proof}
+
+%%%%
+
+\begin{ej}
+    (1.6 - Mörters y Peres). Sea $\{B(t) : t \geq 0\}$ un movimiento browniano
+    standard. Probar que, casi seguramente,
+    $$\lim_{t \to \infty}{\frac{B(t)}{t}} = 0$$ 
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+TBD
+\end{proof}
+
+\end{document}
