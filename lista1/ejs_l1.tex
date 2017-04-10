@@ -118,7 +118,28 @@ $ $
     De esto sigue que $\pi_t$ es continua en cualquier $\omega_0$ y, por lo tanto,
     continua en todo su dominio.
 
-    \item TBD
+    \item Sea $\omega \in \CT$ y \Bola{\omega}{\epsilon} una bola abierta.
+    Consideremos
+    $S_{\epsilon}(\omega) = \{ \omega_0(t) : \omega_0 \in \Bola{\omega}{\epsilon} \}$.
+    Probar lo solicitado se reduce a probar que $S_{\epsilon}(\omega)$
+    es abierto en $\mathbb{R}$: de ser así, $S_{\epsilon}(\omega) \in \Bor{\mathbb{R}}$,
+    por lo que la $\sigma$-álgebra de Kolmogorov contendrá a \Bola{\omega}{\epsilon}.
+    Sea entonces $x \in S_{\epsilon}(\omega)$. Esto implica que $x = \omega_1(t)$ para
+    cierta $\omega_1 \in \Bola{\omega}{\epsilon}$. Sea
+    $\delta = \epsilon - \normi{\omega - \omega_1} > 0$. Vamos a ver que 
+    $\Bola{x}{\delta} \subset S_{\epsilon}(\omega)$. Para ello, tomemos
+    $y \in \Bola{x}{\delta}$ y consideremos la siguiente $\omega_2 : \CT \to \mathbb{R}$:
+    $$\omega_2(s) = \omega_1(s) + (y - x)$$
+    \begin{itemize}
+        \item En primer lugar, tenemos que $\omega_2(t) = \omega_1(t) + (y - x)
+        = \omega_1(t) + (y - \omega_1(t)) = y$.
+        \item Además, $\normi{\omega_1 - \omega_2} = |x - y| < \delta = \epsilon - \normi{\omega - \omega_1}$.
+        \item Finalmente, $\normi{\omega - \omega_2} \leq \normi{\omega - \omega_1} + \normi{\omega_1 - \omega_2}
+        < \epsilon$.
+    \end{itemize}
+    De todo esto sigue que $\omega_2 \in \Bola{\omega}{\epsilon}$ y que $y \in S_{\epsilon}(\omega)$,
+    lo cual demuestra lo que deseábamos.
+
 \end{enumerate}
 
 \end{proof}
