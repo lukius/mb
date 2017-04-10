@@ -35,6 +35,8 @@
 \newcommand{\CTesp}{\ensuremath{(C([0,T], \mathbb{R}), \norm{\cdot}_{\infty})}}
 \newcommand{\Bor}[1]{\ensuremath{\mathcal{B}(#1)}}
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\cupdot}{\mathbin{\mathaccent\cdot\cup}}
+\newcommand{\Bola}[2]{\ensuremath{B_{#2}(#1)}}
 
 \newtheorem*{ej}{Ejercicio}
 
@@ -70,7 +72,36 @@
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
-TBD
+$ $
+
+\begin{enumerate}[a)]
+    \item Sea $U \subset E$ un conjunto abierto no vacío. Por ser $(E,d)$ un
+    espacio métrico separable, sabemos que existe
+    $S = \{s_1,\dots,s_n,\dots\} \subset E$ numerable y denso tal que
+    $U \cap S = V \neq \emptyset$. Podemos entonces escribir $U = V \cupdot W$,
+    donde $W$ es tal que no posee ningún subconjunto abierto (de lo
+    contrario, un tal subconjunto $X$ satisfaría $X \cap S \neq \emptyset$,
+    de manera que $X \subset V$). Por ser $U$ abierto, dado $w \in W$, se tiene
+    que existe $\epsilon > 0$ tal que $\Bola{w}{\epsilon} \subset U$, de manera
+    que debe existir por lo menos un $v \in V$ en $\Bola{w}{\epsilon}$ (de no ser
+    así, $\Bola{w}{\epsilon} \subset W$, pero ya argumentamos que $W$ no puede
+    tener subconjuntos abiertos). Pero $v \in S$, lo cual significa que 
+    $v = s_i$ para cierto $i \in \mathbb{N}$. Por simetría de $d$, sabemos que
+    $d(s_i, w) = d(w,s_i) < \epsilon \Rightarrow w \in \Bola{s_i}{\epsilon}$.
+    Esta observación sugiere tomar en consideración las bolas
+    \begin{eqnarray*}
+        B_n &=& \left\{ x \in E : d(s_n, x) < \epsilon_n \right\}, \\
+        \epsilon_n &=& \sup \left\{ d(s_n,w) : w \in W \wedge s_n
+            \in \Bola{w}{\epsilon}, \epsilon > 0 \right\}
+            \cup \left\{ \epsilon_0 \right\}
+    \end{eqnarray*}
+    para cada $n \in \mathbb{N}$, en donde $\epsilon_0 > 0$ se introduce a los
+    efectos de cubrir eventuales elementos de $V$ que no fuesen alcanzados por
+    ningún $w \in W$. Se tiene entonces que
+    $U \subset \bigcup{B_n}$\footnote{Se ve claramente que mi argumento no utiliza
+    la hipótesis de que $(E,d)$ es completo. ?`Es realmente necesaria?}.
+\end{enumerate}
+
 \end{proof}
 
 %%%%
