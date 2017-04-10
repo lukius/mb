@@ -81,25 +81,26 @@ $ $
     $U \cap S = V \neq \emptyset$. Podemos entonces escribir $U = V \cupdot W$,
     donde $W$ es tal que no posee ningún subconjunto abierto (de lo
     contrario, un tal subconjunto $X$ satisfaría $X \cap S \neq \emptyset$,
-    de manera que $X \subset V$). Por ser $U$ abierto, dado $w \in W$, se tiene
-    que existe $\epsilon > 0$ tal que $\Bola{w}{\epsilon} \subset U$, de manera
-    que debe existir por lo menos un $v \in V$ en $\Bola{w}{\epsilon}$ (de no ser
-    así, $\Bola{w}{\epsilon} \subset W$, pero ya argumentamos que $W$ no puede
-    tener subconjuntos abiertos). Pero $v \in S$, lo cual significa que 
-    $v = s_i$ para cierto $i \in \mathbb{N}$. Por simetría de $d$, sabemos que
-    $d(s_i, w) = d(w,s_i) < \epsilon \Rightarrow w \in \Bola{s_i}{\epsilon}$.
-    Esta observación sugiere tomar en consideración las bolas
-    \begin{eqnarray*}
-        B_n &=& \left\{ x \in E : d(s_n, x) < \epsilon_n \right\}, \\
-        \epsilon_n &=& \sup \left\{ d(s_n,w) : w \in W \wedge s_n
-            \in \Bola{w}{\epsilon}, \epsilon > 0 \right\}
-            \cup \left\{ \epsilon_0 \right\}
-    \end{eqnarray*}
-    para cada $n \in \mathbb{N}$, en donde $\epsilon_0 > 0$ se introduce a los
-    efectos de cubrir eventuales elementos de $V$ que no fuesen alcanzados por
-    ningún $w \in W$. Se tiene entonces que
-    $U \subset \bigcup{B_n}$\footnote{Se ve claramente que mi argumento no utiliza
+    de manera que $X \subset V$). Por ser $U$ abierto, para cada $v = s_i
+    \in V$, se tiene que existe $\epsilon_i > 0$ tal que
+    $\Bola{s_i}{\epsilon_i} \subset U$. Sea
+    $\epsilon = \inf \left\{ \epsilon_n : n \in \mathbb{N} \right\}$.
+    Dado $w \in W$, tenemos como antes que existe $\delta > 0$ tal que
+    $\Bola{w}{\delta} \subset U$, de manera que debe existir por lo menos
+    un $s_j \in V$ en $\Bola{w}{\delta}$. De no ser así,
+    $\Bola{w}{\delta} \subset W$, pero ya argumentamos que $W$ no puede
+    tener subconjuntos abiertos. Sea $\beta = \min(\delta, \epsilon)$.
+    Luego, por este mismo razonamiento, $s_j \in \Bola{w}{\beta}$ para
+    cierto $j \in \mathbb{N}$, y
+    $d(s_j,w) = d(w,s_j) < \beta \leq \epsilon \leq \epsilon_j \Rightarrow 
+    w \in \Bola{s_j}{\epsilon_j}$. Esto sugiere tomar en consideración las
+    bolas
+    $$B_n = \left\{ x \in E : d(s_n, x) < \epsilon_n \right\}$$
+    para cada $n \in \mathbb{N}$. Por todo lo anterior, se observa que
+    $U = \bigcup B_n$\footnote{Se ve claramente que mi argumento no utiliza
     la hipótesis de que $(E,d)$ es completo. ?`Es realmente necesaria?}.
+
+    \item TBD
 \end{enumerate}
 
 \end{proof}
