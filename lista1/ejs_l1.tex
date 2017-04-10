@@ -31,6 +31,7 @@
 \rhead{}
 
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normi}[1]{\norm{#1}_{\infty}}
 \newcommand{\CT}{\ensuremath{C([0,T], \mathbb{R})}}
 \newcommand{\CTesp}{\ensuremath{(C([0,T], \mathbb{R}), \norm{\cdot}_{\infty})}}
 \newcommand{\Bor}[1]{\ensuremath{\mathcal{B}(#1)}}
@@ -77,19 +78,21 @@ $ $
 \begin{enumerate}[a)]
     \item Sea $U \subset E$ un conjunto abierto no vacío. Por ser $(E,d)$ un
     espacio métrico separable, sabemos que existe
-    $S = \{s_1,\dots,s_n,\dots\} \subset E$ numerable y denso tal que
-    $U \cap S = V \neq \emptyset$. Podemos entonces escribir $U = V \cupdot W$,
-    donde $W$ es tal que no posee ningún subconjunto abierto (de lo
-    contrario, un tal subconjunto $X$ satisfaría $X \cap S \neq \emptyset$,
-    de manera que $X \subset V$). Por ser $U$ abierto, para cada $v = s_i
-    \in V$, se tiene que existe $\epsilon_i > 0$ tal que
+    $S \subset E$ numerable y denso, i.e., $S = \{s_1,\dots,s_n,\dots\}$
+    es tal que $U \cap S = V \neq \emptyset$. Podemos entonces escribir
+    $U = V \cupdot W$, donde $W$ es tal que no posee ningún subconjunto
+    abierto (de lo contrario, un tal subconjunto $X$ satisfaría 
+    $X \cap S \neq \emptyset$, de manera que $X \subset V$).
+    Por ser $U$ abierto, para cada $v = s_i \in V$,
+    se tiene que existe $\epsilon_i > 0$ tal que
     $\Bola{s_i}{\epsilon_i} \subset U$. Sea
     $\epsilon = \inf \left\{ \epsilon_n : n \in \mathbb{N} \right\}$.
     Dado $w \in W$, tenemos como antes que existe $\delta > 0$ tal que
     $\Bola{w}{\delta} \subset U$, de manera que debe existir por lo menos
     un $s_j \in V$ en $\Bola{w}{\delta}$. De no ser así,
     $\Bola{w}{\delta} \subset W$, pero ya argumentamos que $W$ no puede
-    tener subconjuntos abiertos. Sea $\beta = \min(\delta, \epsilon)$.
+    tener subconjuntos abiertos. Sea $\beta = \min(\delta, \epsilon)$\footnote
+    {Si $\epsilon = 0$ hay que cambiar la estrategia.}.
     Luego, por este mismo razonamiento, $s_j \in \Bola{w}{\beta}$ para
     cierto $j \in \mathbb{N}$, y
     $d(s_j,w) = d(w,s_j) < \beta \leq \epsilon \leq \epsilon_j \Rightarrow 
@@ -99,6 +102,21 @@ $ $
     para cada $n \in \mathbb{N}$. Por todo lo anterior, se observa que
     $U = \bigcup B_n$\footnote{Se ve claramente que mi argumento no utiliza
     la hipótesis de que $(E,d)$ es completo. ?`Es realmente necesaria?}.
+
+    \item TBD
+
+    \item Sea $\omega_0 \in \CT$, $\epsilon >0$ y definamos $\delta = \epsilon/2$.
+    Supongamos que, para cierta $\omega \in \CT$,
+    $\normi{\omega - \omega_0} < \delta$. Entonces,
+    \begin{eqnarray*}
+        |\pi_t(\omega) - \pi_t(\omega_0)| &=& |\omega(t) - \omega_0(t)| \\
+        &\leq& \sup \left\{ |\omega(s) - \omega_0(s)| : s \in [0,T] \right\} \\
+        &=& \normi{\omega - \omega_0} \\
+        &<& \delta \\
+        &<& \epsilon
+    \end{eqnarray*}
+    De esto sigue que $\pi_t$ es continua en cualquier $\omega_0$ y, por lo tanto,
+    continua en todo su dominio.
 
     \item TBD
 \end{enumerate}
