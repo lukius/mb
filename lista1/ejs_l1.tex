@@ -11,6 +11,7 @@
 \usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage{etoolbox}
+\usepackage[implicit=false]{hyperref}
 \usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[sc]{mathpazo}
@@ -128,7 +129,7 @@ $ $
     cierta $\omega_1 \in \Bola{\omega}{\epsilon}$. Sea
     $\delta = \epsilon - \normi{\omega - \omega_1} > 0$. Vamos a ver que 
     $\Bola{x}{\delta} \subset S_{\epsilon}(\omega)$. Para ello, tomemos
-    $y \in \Bola{x}{\delta}$ y consideremos la siguiente $\omega_2 : \CT \to \mathbb{R}$:
+    $y \in \Bola{x}{\delta}$ y consideremos la siguiente $\omega_2 : [0,T] \to \mathbb{R}$:
     $$\omega_2(s) = \omega_1(s) + (y - x)$$
     \begin{itemize}
         \item En primer lugar, tenemos que $\omega_2(t) = \omega_1(t) + (y - x)
@@ -139,6 +140,44 @@ $ $
     \end{itemize}
     De todo esto sigue que $\omega_2 \in \Bola{\omega}{\epsilon}$ y que $y \in S_{\epsilon}(\omega)$,
     lo cual demuestra lo que deseábamos.
+
+    \item
+        \begin{itemize}
+            \item Veamos primero que $\mathcal{B} \subseteq \mathcal{K}$.
+            Al ser \CTesp \, un espacio métrico separable\footnote{Referencia 
+            \href{http://mathoverflow.net/questions/46011/is-the-space-of-continuous-functions-from-a-compact-metric-space-into-a-polish-s}{acá}},
+            por el ítem (b) sabemos que existen numerables bolas abiertas $\{B_n\}_{n \in \mathbb{N}}$ tales que
+            $$\mathcal{B} = \sigma\left(\left\{B_n : n \in \mathbb{N}\right\}\right)$$
+            Ahora bien, valiéndonos del ítem anterior, tenemos que cada $B_n \in \mathcal{K}$.
+            De esto sigue que $\mathcal{B} \subseteq \mathcal{K}$.
+
+            \item Ahora resta probar que $\mathcal{K} \subseteq \mathcal{B}$. Sea
+            $B$ un abierto en $\mathbb{R}$. Vamos a ver que $U_t = \pi_t^{-1}(B)$,
+            $t \in [0,T]$, es abierto en \CT, con lo que $U_t \in \mathcal{B}$. 
+            Sea $x \in B$ y sea $\epsilon > 0$ tal que
+            $\Bola{x}{\epsilon} \subset B$. Sea además $\omega_0 \in \CT$ tal que
+            $\omega_0(t) = x \Rightarrow \omega_0 \in U_t$. Ahora consideremos
+            una $\omega_1 \in \Bola{\omega_0}{\epsilon}$ arbitraria. Luego,
+            $$|\omega_0(t) - \omega_1(t)| = |x - \omega_1(t)| \leq
+              \normi{\omega_0 - \omega_1} < \epsilon$$
+            En consecuencia, se tiene que $\omega_1(t) \in \Bola{x}{\epsilon} \subset B$,
+            por lo que $\omega_1 \in U_t$.
+
+            Para completar la prueba de $\mathcal{K} \subseteq \mathcal{B}$, podría
+            razonarse por inducción transfinita en $\Bor{\mathbb{R}}$ argumentando
+            lo siguiente:
+                \begin{itemize}
+                    \item Dado $B$ una unión numerable de conjuntos
+                    $\{\tilde{B}_n\}_{n \in \mathbb{N}} \in \Bor{\mathbb{R}}$
+                    tales que $\pi_t^{-1}(\tilde{B}_n) \in \mathcal{B}$ para todo $n$, se tiene que
+                    $B \in \mathcal{B}$, y
+
+                    \item Dado $B$ un complemento de cierto $\tilde{B} \in \Bor{\mathbb{R}}$ tal
+                    que $\pi_t^{-1}(\tilde{B}) \in \mathcal{B}$, se tiene que
+                    $B \in \mathcal{B}$.
+                \end{itemize}
+            
+        \end{itemize}
 
 \end{enumerate}
 
