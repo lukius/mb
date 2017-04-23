@@ -96,4 +96,48 @@ para ser una martingala.
 
 \end{proof}
 
+%%%%
+
+\begin{ej}
+Sea $B = (B(t), t \geq 0)$ un movimiento browniano unidimensional. Probar que es una martingala.
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+Dado $t \geq 0$, sea $\Sig{F}_t = \SigAlg{B(s), s \leq t}$ ($(\Sig{F}_t)_{t \geq 0}$ es, pues,
+la filtración natural de $B$). Veremos entonces que $B$ es una $\Sig{F}_t$-martingala probando
+que satisface las tres propiedades enunciadas en la definición:
+
+\begin{itemize}
+    \item $B(t)$ es $\Sig{F}_t$-medible
+
+    Esto es trivialmente cierto siendo $(\Sig{F}_t)_{t \geq 0}$ la filtración natural de $B$.
+
+    \item $\Exp{\abs{B(t)}} < \infty$
+
+    Sea $B(0) = x \in \mathbb{R}$. Siendo $(B(t) - B(0)) \sim N(0,t)$ tenemos que
+    $$B(t) = \left(B(t) - B(0)\right) + x \sim N(x,t)$$
+    Luego, $\abs{B(t)}$ tiene una distribución normal doblada, de manera que
+    $\Exp{\abs{B(t)}} < \infty$ por ser $\Exp{B(t)} = x < \infty$.
+
+    \item $\ExpC{B(t)}{\Sig{F}_s} = B(s)$, con $0 < s < t$
+
+    Dado $0 < s < t$, 
+    \begin{eqnarray*}
+        \ExpC{B(t)}{\Sig{F}_s} &=& \ExpC{B(t) - B(s) + B(s)}{\Sig{F}_s} \\
+        &\overset{\tiny{(\textrm{Linealidad de } E[\cdot|\cdot])}}{=}&
+            \ExpC{B(t) - B(s)}{\Sig{F}_s} + \ExpC{B(s)}{\Sig{F}_s} \\
+        &\overset{\tiny{(B(s) \,\, \Sig{F}_s-\textrm{medible}})}{=}&
+            \ExpC{B(t) - B(s)}{\Sig{F}_s} + B(s) \\
+        &\overset{\tiny(\star)}{=}& \Exp{B(t) - B(s)} + B(s) \\
+        &\overset{\tiny{(B(t)-B(s) \, \sim \, N(0,~t-s))}}{=}&
+            0 + B(s) \\
+        &=& B(s)
+    \end{eqnarray*}
+    en donde $(\star)$ vale por independencia de la variable aleatoria $(B(t) - B(s))$
+    y la $\sigma$-álgebra $\Sig{F}_s$, que a su vez se desprende de la independencia
+    entre $B(t)-B(s)$ y $B(r)$, $0 \leq r \leq s$ (esto último como consecuencia de la
+    propiedad de incrementos independientes de $B$).
+\end{itemize}
+\end{proof}
+
 \end{document}
