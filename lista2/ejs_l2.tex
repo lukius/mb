@@ -34,6 +34,9 @@
 \newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
 \newcommand{\Sig}[1]{\ensuremath{\mathcal{#1}}}
 \newcommand{\SigAlg}[1]{\ensuremath{\sigma\left(#1\right)}}
+\newcommand{\Mart}[2]{\ensuremath{\left(#1_n, \Sig{#2}_n\right)}}
+\newcommand{\Exp}[1]{\ensuremath{\textrm{E}\left[#1\right]}}
+\newcommand{\ExpC}[2]{\ensuremath{\textrm{E}\left[#1 \, | \, #2\right]}}
 
 \newtheorem*{ej}{Ejercicio}
 
@@ -41,12 +44,42 @@
 \maketitle
 
 \begin{ej} 
-    Sea $(X_n, \Sig{F}_n)$ una martingala. Considerar $\Sig{U}_n = \SigAlg{X_1, \dots, X_n}$.
-    Probar que $(X_n, \Sig{U}_n)$ es una martingala.
+    Sea \Mart{X}{F}~una martingala. Considerar $\Sig{U}_n = \SigAlg{X_1, \dots, X_n}$.
+    Probar que \Mart{X}{U}~es una martingala.
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
-$ $
+Veamos que $\Mart{X}{U}_{n \geq 1}$~satisface las tres propiedades que debe poseer
+para ser una martingala. 
+
+\begin{itemize}
+    \item $X_n$ debe ser $\Sig{U}_n$-medible
+
+    Por definición de $\Sig{U}_n = \SigAlg{X_1, \dots, X_n}$ se tiene que $\Sig{U}_n$
+    es la menor $\sigma$-álgebra para la que $X_1,\dots,X_n$ son medibles. En
+    particular, $X_n$ es $\Sig{U}_n$-medible.
+
+    \item $\Exp{\abs{X_n}} < \infty$
+
+    Esto sigue inmediatamente por ser \Mart{X}{F}~una martingala.
+
+    \item $\ExpC{X_{n+1}}{\Sig{U}_n} = X_n$
+
+    En primer lugar, observemos que $\Sig{U}_n \subseteq \Sig{F}_n$. Sabemos que
+    $X_1,\dots,X_n$ son $\Sig{F}_n$-medibles por ser cada $X_i$, $1 \leq i \leq n$,
+    $\Sig{F}_i$-medible y ser \Sig{F}~una filtración (i.e.,
+    $\Sig{F}_i \subseteq \Sig{F}_n$). Además, como ya se dijo, $\Sig{U}_n$ es la
+    menor $\sigma$-álgebra para la que $X_1,\dots,X_n$ son medibles, de manera que
+    $\Sig{U}_n \subseteq \Sig{F}_n$, que es lo que se pretendía observar. Luego,
+    \begin{eqnarray*}
+        \ExpC{X_{n+1}}{\Sig{U}_n} &\overset{\tiny{\textrm{(Torres)}}}{=}&
+            \ExpC{ \ExpC{X_{n+1}}{\Sig{F}_n} }{\Sig{U}_n} \\
+        &\overset{\tiny{(\Mart{X}{F}~\textrm{martingala})}}{=}&
+            \ExpC{X_n}{\Sig{U}_n} \\
+        &\overset{\tiny{(X_n \,\, \Sig{U}_n-\textrm{medible}})}{=}&
+            X_n
+    \end{eqnarray*}
+\end{itemize}
 
 \end{proof}
 
