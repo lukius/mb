@@ -1,0 +1,66 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{lastpage}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage[implicit=false]{hyperref}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+
+\newcommand{\at}{@}
+
+\title{Movimiento Browniano\\
+      \small{Ejercicios entregables - Semana 2}}
+\author{Lucio Santi\\
+        \texttt{lsanti\at dc.uba.ar}}
+\date{\today}
+
+\pagestyle{fancyplain} 
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage/\pageref{LastPage}}
+\lhead{}
+\chead{}
+\rhead{}
+
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\newcommand{\Sig}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\SigAlg}[1]{\ensuremath{\sigma\left(#1\right)}}
+
+\newtheorem*{ej}{Ejercicio}
+
+\begin{document}
+\maketitle
+
+\begin{ej} 
+    Sea $(X_n, \Sig{F}_n)$ una martingala. Considerar $\Sig{U}_n = \SigAlg{X_1, \dots, X_n}$.
+    Probar que $(X_n, \Sig{U}_n)$ es una martingala.
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+$ $
+
+\end{proof}
+
+%%%%
+
+\begin{ej}
+    Sea $(X_n, \Sig{F}_n)_{n \geq 1}$ una martingala e $\{Y_n\}_{n \geq 1}$ un proceso tal
+    que $\abs{Y_n} \leq C_n$ e $Y_n$ es $\Sig{F}_{n−1}$-medible. Sea $X_0 = 0$ y consideremos
+    $$M_n = \displaystyle \sum_{k = 1}^{n}{Y_k \, (X_k − X_{k−1})}$$
+    Probar que $(M_n, \Sig{F}_n)$ es una martingala. 
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+
+\end{proof}
+
+\end{document}
