@@ -72,7 +72,7 @@ para ser una martingala.
     menor $\sigma$-álgebra para la que $X_1,\dots,X_n$ son medibles, de manera que
     $\Sig{U}_n \subseteq \Sig{F}_n$, que es lo que se pretendía observar. Luego,
     \begin{eqnarray*}
-        \ExpC{X_{n+1}}{\Sig{U}_n} &\overset{\tiny{\textrm{(Torres)}}}{=}&
+        \ExpC{X_{n+1}}{\Sig{U}_n} &\overset{\tiny{\textrm{(Prop. de torres)}}}{=}&
             \ExpC{ \ExpC{X_{n+1}}{\Sig{F}_n} }{\Sig{U}_n} \\
         &\overset{\tiny{(\Mart{X}{F}~\textrm{martingala})}}{=}&
             \ExpC{X_n}{\Sig{U}_n} \\
@@ -93,6 +93,54 @@ para ser una martingala.
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
+Al igual que en el ejercicio anterior, probaremos que $\Mart{M}{F}_{n \geq 1}$~satisface las tres
+propiedades de la definición:
+\begin{itemize}
+    \item $M_n$ es $\Sig{F}_n$-medible
+
+    Sea $1 \leq k \leq n$. Por ser $(\Sig{F}_n)_{n \geq 1}$ una filtración, se tiene que
+    $\Sig{F}_k \subseteq \Sig{F}_n$. Tenemos también por hipótesis que $Y_k$ es
+    $\Sig{F}_{k-1}$-medible, de manera que $Y_k$ es $\Sig{F}_n$-medible. Además, $X_k$ es
+    $\Sig{F}_k$-medible por ser $(X_n, \Sig{F}_n)_{n \geq 1}$ una martingala, por lo que
+    $X_k - X_{k-1}$ es también $\Sig{F}_n$-medible. Combinando todo esto, se tiene que
+    $Y_k \, (X_k - X_{k-1})$ es $\Sig{F}_n$-medible y en consecuencia $M_n$ también lo es.
+
+    \item $\Exp{\abs{M_n}} < \infty$
+    \begin{eqnarray*}
+        \Exp{\abs{M_n}} &=& \Exp{\abs{\sum_{k = 1}^{n}{Y_k \, (X_k − X_{k−1})}}} \\
+            &\leq& \Exp{ \sum_{k = 1}^{n}{\abs{Y_k \, (X_k − X_{k−1})}}} \\
+            &=& \Exp{ \sum_{k = 1}^{n}{\abs{Y_k} \, \abs{X_k − X_{k−1}}}} \\
+            &\overset{\tiny{(\textrm{Hip.})}}{\leq}&
+                \Exp{ \sum_{k = 1}^{n}{C_k \, \abs{X_k − X_{k−1}}}} \\
+            &\leq& \Exp{ \sum_{k = 1}^{n}{C \, \abs{X_k − X_{k−1}}}} \\
+            &=& C \cdot \Exp{ \sum_{k = 1}^{n}{\abs{X_k − X_{k−1}}}} \\
+            &=& C \cdot \sum_{k = 1}^{n}{\Exp{\abs{X_k − X_{k−1}}}} \\
+            &<& \infty
+    \end{eqnarray*}
+    Esto último se justifica por ser $C \in \mathbb{R}$ y
+    $\Exp{\abs{X_k - X_{k-1}}} < \infty$ debido a que
+    $\Exp{\abs{X_n}} < \infty$ para todo $n \geq 1$.
+
+    \item $\ExpC{M_{n+1}}{\Sig{F}_n} = M_n$
+    \begin{eqnarray*}
+        \ExpC{M_{n+1}}{\Sig{F}_n} &=& \ExpC{\sum_{k = 1}^{n+1}{Y_k \, (X_k − X_{k−1})}}{\Sig{F}_n} \\
+            &=& \ExpC{Y_{n+1} \, (X_{n+1} - X_n) + \sum_{k = 1}^{n}{Y_k \, (X_k − X_{k−1})}}{\Sig{F}_n} \\
+            &\overset{\tiny{(\textrm{Linealidad de } E[\cdot|\cdot])}}{=}&
+                \ExpC{Y_{n+1} \, (X_{n+1} - X_n)}{\Sig{F}_n} + \ExpC{\sum_{k = 1}^{n}{Y_k \, (X_k − X_{k−1})}}{\Sig{F}_n} \\
+            &=& \ExpC{Y_{n+1} \, (X_{n+1} - X_n)}{\Sig{F}_n} + \ExpC{M_n}{\Sig{F}_n} \\
+            &\overset{\tiny{(M_n \,\, \Sig{F}_n-\textrm{medible}})}{=}&
+                \ExpC{Y_{n+1} \, (X_{n+1} - X_n)}{\Sig{F}_n} + M_n \\
+            &\overset{\tiny{(Y_{n+1} \,\, \Sig{F}_n-\textrm{medible}})}{=}&
+                Y_{n+1} \, \ExpC{X_{n+1} - X_n}{\Sig{F}_n} + M_n \\
+            &\overset{\tiny{(\textrm{Linealidad de } E[\cdot|\cdot])}}{=}&
+                Y_{n+1} \, \left[\ExpC{X_{n+1}}{\Sig{F}_n} - \ExpC{X_n}{\Sig{F}_n} \right] + M_n \\
+            &\overset{\tiny{(\Mart{X}{F}~\textrm{martingala})}}{=}&
+                Y_{n+1} \, \left[X_n - \ExpC{X_n}{\Sig{F}_n} \right] + M_n \\
+            &\overset{\tiny{(X_n \,\, \Sig{F}_n-\textrm{medible}})}{=}&
+                Y_{n+1} \, \left[X_n - X_n \right] + M_n \\
+            &=& M_n
+    \end{eqnarray*}
+\end{itemize}
 
 \end{proof}
 
