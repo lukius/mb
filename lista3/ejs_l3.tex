@@ -53,6 +53,30 @@ con $t_n \uparrow \tau$ tales que $B(t_n) < 0$ y $B(s_n) > 0$.
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
+Consideremos el proceso $(\tilde{B}(t),~ 0 \leq t \leq \tau)$ en donde
+$\tilde{B}(t) = B(\tau - t)$. Es evidente que $\tilde{B}$ es un movimiento browniano
+como consecuencia de que $B$ lo sea. Además, $\tilde{B}$ es un movimiento browniano
+standard puesto que $\tilde{B}(0) = B(\tau) = 0$ (esto último vale por definición
+de $\tau$ y continuidad de $B$). Luego, valiéndonos del resultado estudiado en clase
+(que de hecho es enunciado en el Teorema 2.8 del libro), tenemos que
+$\Probx{0}{\sigma = 0} = 1$, siendo
+$$\sigma = \inf \left\{ 0 < t \leq \tau : \tilde{B}(t) < 0 \right\}$$
+De esto sigue que, casi seguramente, podemos encontrar una sucesión
+de tiempos $t'_n > 0$ tales que $t'_n \downarrow 0$ y $\tilde{B}(t'_n) < 0$ para todo
+$n$. Ahora bien, utilizando el mismo resultado, tenemos que $\Probx{0}{\phi_n = 0} = 1$, 
+con
+$$\phi_n = \inf \left\{ 0 < t < t'_n : \tilde{B}(t) > 0 \right\}$$
+Por ende, podemos afirmar que, casi seguramente, existe una sucesión de tiempos
+$r^n_k > 0$ tales que $r^n_k < t'_n$, $r^n_k \downarrow 0$ y $\tilde{B}(r^n_k) > 0$ para todo
+$k$. Sea $s'_n = r^n_0$ y sean $t_n = \tau - t'_n$ y $s_n = \tau - s'_n$. De esta forma,
+\begin{itemize}
+    \item $t_n < s_n$ puesto que $t'_n > s'_n$.
+    \item $s_n < \tau$ al ser $s'_n > 0$.
+    \item $t_n \uparrow \tau$ puesto que $t'_n \downarrow 0$.
+    \item $B(t_n) = \tilde{B}(\tau - t_n) = \tilde{B}(t'_n) < 0$.
+    \item $B(s_n) = \tilde{B}(\tau - s_n) = \tilde{B}(s'_n) > 0$.
+\end{itemize}
+Consecuentemente, las sucesiones $t_n, s_n$ propuestas satisfacen lo solicitado en el enunciado.
 
 \end{proof}
 
