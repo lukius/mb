@@ -88,6 +88,51 @@ $$\Probx{x}{B(s) \geq 0 ~\forall~ 0 \leq s \leq t, B(t) \in A} = \Probx{x}{B(t) 
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
+Por la ley de probabilidad total,
+$$\Probx{x}{B(t) \in A} = \Probx{x}{B(t) \in A, B(s) \geq 0 ~\forall~ 0 \leq s \leq t} + 
+    \Probx{x}{B(t) \in A, \exists~0 \leq s \leq t : B(s) < 0}$$
+Veamos entonces que $\Probx{-x}{B(t) \in A} = \Probx{x}{B(t) \in A, \exists~0 \leq s \leq t : B(s) < 0}$. Supongamos
+que tenemos un tal browniano $B$ arrancado en $x > 0$ y tal que $B(s) < 0$ para cierto $0 \leq s \leq t$.
+Sea $\sigma = \inf \left\{ 0 \leq u \leq t : B(u) = 0 \right\}$. Siendo $B(s) < 0$ y $B(0) > 0$, tal $\sigma$    
+existe, es positivo y es tal que $B(\sigma) = 0$ por continuidad de $B$. Consideremos entonces el proceso estocástico
+$(\tilde{B}(t),~ t \geq 0)$ definido como sigue, en donde $(B_0(t),~t \geq 0)$ es un movimiento browniano standard:
+$$
+\tilde{B}(t) = 
+\begin{cases}
+B(\sigma -t) & \textrm{ si } 0 \leq t \leq \sigma \\
+B_0(t - \sigma) + x & \textrm{ si } t > \sigma
+\end{cases}
+$$
+Veamos que $\tilde{B}$ es un movimiento browniano standard:
+\begin{itemize}
+    \item $\tilde{B}(0) = B(\sigma) = 0$.
+    \item Fuera de $t = \sigma$, $\tilde{B}$ es continua por continuidad de $B$. Además,
+    \begin{eqnarray*}
+        \lim_{t \to \sigma^{-}}{\tilde{B}(t)} &=& B(0) \\
+            &=& x \\
+            &=& B_0(0) + x \\
+            &=& \lim_{t \to \sigma^{+}}{\tilde{B}(t)}
+    \end{eqnarray*}
+    \item Dados $t \geq 0$ y $h > 0$, los incrementos $\tilde{B}(t+h) - \tilde{B}(t)$ tienen distribución
+    normal con esperanza 0 y varianza $h$ siempre que $t+h$ y $h$ estén ambos a izquierda o a derecha
+    de $\sigma$. Cuando $t+h > \sigma$ y $t \leq \sigma$,
+    $$\tilde{B}(t+h) - \tilde{B}(t) =
+            \underbrace{            
+            \underbrace{B_0((t+h) - \sigma)}_{\sim N(0,~t+h-\sigma)} 
+            + \underbrace{x - B(\sigma - t)}_{\sim N(0,~\sigma - t)}}_{\sim N(0,~h)}$$
+    \item Finalmente, puede verse que $\tilde{B}$ tiene la propiedad de incrementos independientes siguiendo
+    un razonamiento similar al del ítem anterior.
+\end{itemize}
+La idea detrás de $\tilde{B}$ es la de poder reformular la probabilidad anterior de forma más sencilla. 
+Esencialmente, $\tilde{B}$ se mueve entre $0$ y $\sigma$ invirtiendo el movimiento de $B$ y luego
+comportándose como un browniano standard trasladado en $x$. De esta manera, el evento de $B$ llegando a $A$
+en tiempo $t$ equivale al evento de $B_0$ llegando a $A + x$ en tiempo $t - \sigma$. Puesto que la primera
+porción del recorrido de $\tilde{B}$ emula el comportamiento de $B$, tenemos que
+$$\Probx{x}{B(t) \in A, \exists~0 \leq s \leq t : B(s) < 0} = \Probx{0}{\tilde{B}(t) \in A + x}$$
+No obstante, llegar a $A+x$ en tiempo $t$ y arrancando en $0$ equivale a llegar a $A$ en el mismo tiempo
+pero arrancando en $-x$, con lo cual
+$$\Probx{0}{\tilde{B}(t) \in A + x} = \Probx{-x}{B(t) \in A}$$
+Esto prueba lo deseado y completa la resolución del ejercicio.
 
 \end{proof}
 
