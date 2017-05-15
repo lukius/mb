@@ -125,10 +125,10 @@ Veamos que $\tilde{B}$ es un movimiento browniano standard:
 \end{itemize}
 La idea detrás de $\tilde{B}$ es la de poder reformular la probabilidad anterior de forma más sencilla. 
 Esencialmente, $\tilde{B}$ se mueve entre $0$ y $\sigma$ invirtiendo el movimiento de $B$ y luego
-comportándose como un browniano standard trasladado en $x$. De esta manera, el evento de $B$ llegando a $A$
-en tiempo $t$ equivale al evento de $B_0$ llegando a $A$ en tiempo $t - \sigma$. Como $B_0$ está
-trasladado en $x$ y siendo la primera porción del recorrido de $\tilde{B}$ una inversión del recorrido
-de $B$, tenemos que
+comportándose como un browniano standard trasladado en $x$. De esta manera, como consecuencia de la
+propiedad de Markov de $B$, el evento de $B$ llegando a $A$ en tiempo $t$ equivale al evento de $B_0$
+llegando a $A$ en tiempo $t - \sigma$. Como $B_0$ está trasladado en $x$ y siendo la primera porción del
+recorrido de $\tilde{B}$ una inversión del recorrido de $B$, tenemos que
 $$\Probx{x}{B(t) \in A, \exists~0 \leq s \leq t : B(s) < 0} = \Probx{0}{\tilde{B}(t) \in A + x}$$
 No obstante, llegar a $A+x$ en tiempo $t$ y arrancando en $0$ equivale a llegar a $A$ en el mismo tiempo
 pero arrancando en $-x$, con lo cual
