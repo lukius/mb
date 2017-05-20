@@ -1,0 +1,76 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{lastpage}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage[implicit=false]{hyperref}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+
+\newcommand{\at}{@}
+
+\title{Movimiento Browniano\\
+      \small{Ejercicios entregables - Lista 4}}
+\author{Lucio Santi\\
+        \texttt{lsanti\at dc.uba.ar}}
+\date{\today}
+
+\pagestyle{fancyplain} 
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage/\pageref{LastPage}}
+\lhead{}
+\chead{}
+\rhead{}
+
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\newcommand{\Sig}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\SigAlg}[1]{\ensuremath{\sigma\left(#1\right)}}
+\newcommand{\Mart}[2]{\ensuremath{\left(#1_n, \Sig{#2}_n\right)}}
+\newcommand{\Exp}[1]{\ensuremath{\textrm{E}\left[#1\right]}}
+\newcommand{\ExpC}[2]{\ensuremath{\textrm{E}\left[#1 \, | \, #2\right]}}
+\newcommand{\Prob}[1]{\ensuremath{\mathbb{P} \left( #1 \right)}}
+\newcommand{\Probx}[2]{\ensuremath{\mathbb{P}_{#1} \left( #2 \right)}}
+\newcommand{\Expx}[2]{\ensuremath{\textrm{E}_{#1}\left[#2\right]}}
+
+\newtheorem*{ej}{Ejercicio}
+
+\begin{document}
+\maketitle
+
+\begin{ej} 
+Sea $d = 2$, $0 < r < \abs{x} < R$, $\tau = S_r \wedge S_R \,$ y $\, \phi(x) = \log(\abs{x})$,
+en donde
+$$S_z = \inf \left\{ t > 0 : \abs{B(t)} = z \right\}$$
+\begin{enumerate}[a.]
+    \item Probar que $\phi(x) = \Expx{x}{\phi(B(\tau))}$.
+
+    \item Probar que
+    $$\Probx{x}{S_r < S_R} = \frac{\phi(R) - \phi(\abs{x})}{\phi(R) - \phi(r)}$$
+
+    \item Probar que $\Prob{S_r < \infty} = 1$. Concluir que el movimiento browniano
+    bidimensional es recurrente en el sentido de que, para todo
+    $G \subset \mathbb{R}^2$ abierto,
+    $$\Probx{x}{B \in G \textrm{ infinitas veces}} = 1$$
+
+    \item Definir el evento involucrado en la probabilidad de arriba.
+
+    \item Probar que, para todo $x \neq 0$, $\Probx{x}{S_0 < \infty} = 0$.
+
+    \item Probar que el resultado anterior también vale para $x = 0$.
+\end{enumerate}
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+
+\end{proof}
+
+\end{document}
