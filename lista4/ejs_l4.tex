@@ -40,6 +40,7 @@
 \newcommand{\Prob}[1]{\ensuremath{\mathbb{P} \left( #1 \right)}}
 \newcommand{\Probx}[2]{\ensuremath{\mathbb{P}_{#1} \left( #2 \right)}}
 \newcommand{\Expx}[2]{\ensuremath{\textrm{E}_{#1}\left[#2\right]}}
+\newcommand{\ExpxC}[3]{\ensuremath{\textrm{E}_{#1}\left[#2 \, | \, #3\right]}}
 
 \newtheorem*{ej}{Ejercicio}
 
@@ -70,7 +71,36 @@ $$S_z = \inf \left\{ t > 0 : \abs{B(t)} = z \right\}$$
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
-
+$ $ 
+\begin{enumerate}[a.]
+    \item TBD
+    
+    \item Para probar esto, desarrollemos $\Expx{x}{\phi(B(\tau))}$ utilizando la ley
+    de la esperanza total:
+    \begin{eqnarray}
+        \Expx{x}{\phi(B(\tau))}
+            &=& \Expx{x}{\phi(B(\tau)), S_r < S_R} + 
+                \Expx{x}{\phi(B(\tau)), S_r \geq S_R} \nonumber \\
+            &=& \ExpxC{x}{\phi(B(\tau))}{S_r < S_R} \, \Probx{x}{S_r < S_R} +
+                \ExpxC{x}{\phi(B(\tau))}{S_r \geq S_R} \, \Probx{x}{S_r \geq S_R} \nonumber \\
+            &=& \Expx{x}{\phi(B(S_r))}\, \Probx{x}{S_r < S_R} +
+                \Expx{x}{\phi(B(S_R))}\, \Probx{x}{S_r \geq S_R} \nonumber \\
+            &=& \phi(B(S_r))\, \Probx{x}{S_r < S_R} +
+                \phi(B(S_R))\, \Probx{x}{S_r \geq S_R} \nonumber \\
+            &=& \log(\abs{B(S_r)})\, \Probx{x}{S_r < S_R} +
+                \log(\abs{B(S_R)})\, \Probx{x}{S_r \geq S_R} \nonumber \\
+            &=& \log(r)\, \Probx{x}{S_r < S_R} +
+                \log(R)\, \Probx{x}{S_r \geq S_R} \nonumber \\
+            &=& \log(r)\, \Probx{x}{S_r < S_R} +
+                \log(R)\, (1 - \Probx{x}{S_r < S_R}) \nonumber \\
+            &=& \Probx{x}{S_r < S_R} (\log(r) - \log(R)) + \log(R) \nonumber \\
+            &=& \Probx{x}{S_r < S_R} (\phi(r) - \phi(R)) + \phi(R) \label{eq:E}
+    \end{eqnarray}
+    Ahora bien, el ítem anterior nos asegura que $\Expx{x}{\phi(B(\tau))} = (\ref{eq:E}) = \phi(x)$,
+    por lo que
+    $$\Probx{x}{S_r < S_R} = \frac{\phi(x) - \phi(R)}{\phi(r) - \phi(R)} 
+        = \frac{\phi(R) - \phi(x)}{\phi(R) - \phi(r)}$$
+\end{enumerate}
 \end{proof}
 
 \end{document}
