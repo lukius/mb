@@ -41,6 +41,7 @@
 \newcommand{\Probx}[2]{\ensuremath{\mathbb{P}_{#1} \left( #2 \right)}}
 \newcommand{\Expx}[2]{\ensuremath{\textrm{E}_{#1}\left[#2\right]}}
 \newcommand{\ExpxC}[3]{\ensuremath{\textrm{E}_{#1}\left[#2 \, | \, #3\right]}}
+\newcommand{\Ev}[1]{\ensuremath{\left\{ #1 \right\}}}
 
 \newtheorem*{ej}{Ejercicio}
 
@@ -100,6 +101,9 @@ $ $
     por lo que
     $$\Probx{x}{S_r < S_R} = \frac{\phi(x) - \phi(R)}{\phi(r) - \phi(R)} 
         = \frac{\phi(R) - \phi(x)}{\phi(R) - \phi(r)}$$
+
+    \item Al considerar el evento $A = \Ev{S_r < \infty}$, observamos que
+    $$\Ev{\union_{n = 1}^{\infty}{\Ev{S_r < S_n}}} \subseteq A$$
 \end{enumerate}
 \end{proof}
 
