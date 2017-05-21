@@ -103,7 +103,27 @@ $ $
         = \frac{\phi(R) - \phi(x)}{\phi(R) - \phi(r)}$$
 
     \item Al considerar el evento $A = \Ev{S_r < \infty}$, observamos que
-    $$\Ev{\union_{n = 1}^{\infty}{\Ev{S_r < S_n}}} \subseteq A$$
+    $$\bigcup_{n \, \in \, \mathbb{N}}{\Ev{S_r < S_n}} \subseteq A$$
+    Además, si $n < m$, se tiene que $\Ev{S_r < S_n} \subseteq \Ev{S_r < S_m}$. Por todo esto,
+    \begin{eqnarray*}
+        \Prob{S_r < \infty} &\geq& \Prob{\bigcup_{n \, \in \, \mathbb{N}}{\Ev{S_r < S_n}}} \\
+            &=& \lim_{n \to \infty}{\Prob{S_r < S_n}} \\
+            &=& \lim_{n \to \infty}{\frac{\phi(n) - \phi(x)}{\phi(n) - \phi(r)}} \\
+            &=& 1
+    \end{eqnarray*}
+    En consecuencia, $\Prob{S_r < \infty} = 1$. Por otro lado, dado un abierto arbitrario
+    $G \subset \mathbb{R}^2$, sabemos que $G$ puede expresarse como una unión numerable
+    de bolas abiertas $U_1,\dots,U_n,\dots$.
+    Por lo visto más arriba, tenemos que $\Prob{S_{u - \epsilon} < \infty} = 1$,
+    siendo $u$ el radio de $U_1$ y $0 < \epsilon < u$. Notemos $\tilde{B}$ al movimiento
+    browniano planar trasladado al centro de $U_1$. Al ser $S_{u - \epsilon}$ un
+    tiempo de parada, por la propiedad de Markov fuerte de $\tilde{B}$ se tiene que el proceso
+    $(\tilde{B}(S_{u-\epsilon} + t) - \tilde{B}(S_{u-\epsilon}), t \geq 0)$
+    es un movimiento browniano independiente de $\mathcal{F}^{+}(S_{u-\epsilon})$,
+    por lo que una repetición de este mismo razonamiento nos lleva a concluir que 
+    $$\Prob{\tilde{B} \in U_1 \textrm{ infinitas veces}} = 1$$
+    Pero $U_1 \subseteq G$, de lo que se desprende que
+    $$\Prob{\tilde{B} \in G \textrm{ infinitas veces}} = 1$$
 \end{enumerate}
 \end{proof}
 
