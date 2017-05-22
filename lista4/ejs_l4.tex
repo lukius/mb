@@ -147,14 +147,11 @@ $ $
     $0 \leq t \leq 1$. No obstante, un razonamiento inductivo mediante este corolario junto con la
     propiedad de Markov de $B$ nos lleva a concluir que $\Probx{x}{S_0 < \infty} = 0$.
 
-    \item Supongamos que $\Probx{x}{S_0 < \infty} > 0$ cuando $x = 0$. Como el evento
-    $\Ev{S_0 < \infty} \in \mathcal{F}^{+}(0)$, por la ley $0-1$ de Blumenthal tenemos que
-    $\Probx{x}{S_0 < \infty} = 1$, i.e., existe un tiempo $s \in \mathbb{R}$ positivo tal que
-    $S_0 = s$ y $B(s) = 0$ casi seguramente. Sea $t = s - \epsilon$, con $0 < \epsilon < s$.
-    Por ser $s$ el ínfimo de los tiempos en los que $B$ pasa por el origen, tenemos que
-    $x'= B(t) \neq 0$. Utilizando ahora el ítem anterior, observamos que
-    $\Probx{x'}{S_0 < \infty} = 0$, lo cual contradice la existencia de $s$. De esta forma,
-    necesariamente debe ser $\Probx{x}{S_0 < \infty} = 0$.
+    \item Cuando $x = 0$ también podemos utilizar el corolario mencionado anteriormente para
+    afirmar que $B(t)$ casi seguramente no pasa por el origen cuando $0 < t \leq 1$. El resto
+    del razonamiento es análogo. Notar que $S_0$ está definido como el ínfimo de los tiempos
+    positivos en los que $B = 0$ que, como consecuencia de lo mencionado, es casi seguramente
+    un conjunto vacío. De esta forma, $\Probx{x}{S_0 = \infty} = 1$, i.e., $\Probx{x}{S_0 < \infty} = 0$.
 \end{enumerate}
 \end{proof}
 
