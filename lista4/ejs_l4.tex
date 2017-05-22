@@ -124,6 +124,37 @@ $ $
     $$\Prob{\tilde{B} \in U_1 \textrm{ infinitas veces}} = 1$$
     Pero $U_1 \subseteq G$, de lo que se desprende que
     $$\Prob{\tilde{B} \in G \textrm{ infinitas veces}} = 1$$
+
+    \item Sea $G \subset \mathbb{R}^2$ un abierto y $E$ el evento ``el movimiento browniano planar
+    $B$ entra en $G$ infinitas veces''. Con el objeto de formalizar $E$, nos interesaría expresar
+    que, dado cualquier tiempo $t \in \mathbb{R}$, es posible encontrar un tiempo $t' > t$ tal que
+    $B(t') \in G$. En primera instancia, notaremos $T_0$ al primer instante en el que $B$ entra
+    en $G$:
+    $$T_0 = \inf \left\{ t > 0 : B(t) \in G \right\}$$
+    Definamos ahora los instantes $T_s$ en los que $B$ regresa a $G$, con $s > 0$:
+    $$T_s = \sup \left\{ T_0 < t < T_0+s : B(t) \in G \right\}$$
+    En función de estos tiempos aleatorios, podemos escribir a $E$ de la siguiente forma:
+    $$E = \bigcap_{q \, \in \, \mathbb{Q}}{\bigcup_{k \, \in \, \mathbb{N}}{\Ev{T_k > q}}}$$
+
+    \item Observemos primero que
+    $$S_0 = \inf \left\{ t > 0 : \abs{B(t)} = 0 \right\}
+          = \inf \left\{ t > 0 : B(t) = 0 \right\}$$
+    En otras palabras, nos interesa probar que $B$ no pasa por el origen casi seguramente. Esto 
+    en definitiva es una consecuencia directa del Corolario 2.26 del libro, estudiado también en 
+    clase. Éste asegura que, dados cualquier par de puntos $x, y \in \mathbb{R}^2$,
+    $\Probx{x}{y \in B(0,1]} = 0$. En este caso, instanciar el resultado con $x \neq 0$ e $y = 0$
+    nos permite afirmar que $B(t)$ casi seguramente no pasa por el origen cuando
+    $0 \leq t \leq 1$. No obstante, un razonamiento inductivo mediante este corolario junto con la
+    propiedad de Markov de $B$ nos lleva a concluir que $\Probx{x}{S_0 < \infty} = 0$.
+
+    \item Supongamos que $\Probx{x}{S_0 < \infty} > 0$ cuando $x = 0$. Como el evento
+    $\Ev{S_0 < \infty} \in \mathcal{F}^{+}(0)$, por la ley $0-1$ de Blumenthal tenemos que
+    $\Probx{x}{S_0 < \infty} = 1$, i.e., existe un tiempo $s \in \mathbb{R}$ positivo tal que
+    $S_0 = s$ y $B(s) = 0$ casi seguramente. Sea $t = s - \epsilon$, con $0 < \epsilon < s$.
+    Por ser $s$ el ínfimo de los tiempos en los que $B$ pasa por el origen, tenemos que
+    $x'= B(t) \neq 0$. Utilizando ahora el ítem anterior, observamos que
+    $\Probx{x'}{S_0 < \infty} = 0$, lo cual contradice la existencia de $s$. De esta forma,
+    necesariamente debe ser $\Probx{x}{S_0 < \infty} = 0$.
 \end{enumerate}
 \end{proof}
 
