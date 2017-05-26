@@ -74,7 +74,31 @@ $$S_z = \inf \left\{ t > 0 : \abs{B(t)} = z \right\}$$
 \begin{proof}[Resoluci\'on]
 $ $ 
 \begin{enumerate}[a.]
-    \item TBD
+    \item Sea $X(t) = \log \abs{B(t)}$. Si podemos probar que $(X(t), t \geq 0)$ es
+    martingala, podemos valernos del teorema de muestreo opcional para llegar al
+    resultado deseado. En efecto, $\tau$ es tiempo de parada y, además,
+       $$\abs{X(t \wedge \tau)} = \abs{\log \abs{B(t \wedge \tau)}} \leq \log R$$
+    puesto que $\abs{B(t)} < R$  cuando $t < \tau$ y
+    $\abs{B(t \wedge \tau)} = \abs{B(\tau)} \in \{r, R\}$ cuando
+    $t \geq \tau$. Claramente, $X = \log R$ es una variable aleatoria (constante)
+    integrable. Luego, tenemos que
+    $$\Exp{X(\tau)} = X(0) = \log \abs{B(0)} = \log \abs{x}$$
+    de manera que 
+    $$\Expx{x}{\log \abs{B(\tau)}} = \log \abs{x}$$
+
+    Veamos ahora que $(X(t), t \geq 0)$ es martingala. Para esto, nos valdremos del
+    Corolario 2.53 del libro, que afirma que $(\phi(B(t)), t \geq 0)$ es martingala
+    si $\Delta \phi(z) = 0$ y $\Expx{z}{\abs{\phi(B(t))}} < \infty$
+    para cualquier $t > 0$ y $z \in \mathbb{R}^2$. Calculemos entonces
+    $\Delta \phi$, donde $\phi(z) = \phi((x,y)) = \log(\sqrt{x^2 + y^2})$. 
+    Tenemos que 
+    $$\frac{\partial^2 \phi}{\partial x^2} = \frac{y^2 - x^2}{(x^2 + y^2)^2}$$
+    y, por simetría,
+    $$\frac{\partial^2 \phi}{\partial y^2} = \frac{x^2 - y^2}{(x^2 + y^2)^2}$$
+    con lo cual $\Delta \phi(z) = 0$. Ahora resta ver que
+    $\Expx{z}{\abs{\phi(B(t))}} < \infty$.
+    
+
     
     \item Para probar esto, desarrollemos $\Expx{x}{\phi(B(\tau))}$ utilizando la ley
     de la esperanza total:
