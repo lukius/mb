@@ -74,7 +74,8 @@ $$S_z = \inf \left\{ t > 0 : \abs{B(t)} = z \right\}$$
 \begin{proof}[Resoluci\'on]
 $ $ 
 \begin{enumerate}[a.]
-    \item Sea $X(t) = \log \abs{B(t)}$. Si podemos probar que $(X(t), t \geq 0)$ es
+    \item Sea $X(t) = \log \abs{B(t \wedge \tau)}$. Si podemos probar que
+    $(X(t), t \geq 0)$ es
     martingala, podemos valernos del teorema de muestreo opcional para llegar al
     resultado deseado. En efecto, $\tau$ es tiempo de parada y, además,
        $$\abs{X(t \wedge \tau)} = \abs{\log \abs{B(t \wedge \tau)}} \leq \log R$$
@@ -88,17 +89,18 @@ $ $
 
     Veamos ahora que $(X(t), t \geq 0)$ es martingala. Para esto, nos valdremos del
     Corolario 2.53 del libro, que afirma que $(\phi(B(t)), t \geq 0)$ es martingala
-    si $\Delta \phi(z) = 0$ y $\Expx{z}{\abs{\phi(B(t))}} < \infty$
-    para cualquier $t > 0$ y $z \in \mathbb{R}^2$. Calculemos entonces
-    $\Delta \phi$, donde $\phi(z) = \phi((x,y)) = \log(\sqrt{x^2 + y^2})$. 
+    si $\Delta \phi(x) = 0$ y $\Expx{x}{\abs{\phi(B(t))}} < \infty$
+    para cualquier $t > 0$ y $x \in \mathbb{R}^2$. En particular, en nuestro caso
+    nos interesa el comportamiento de $B$ cuando $0 \leq t \leq \tau$ y 
+    $r < \abs{x} < R$. En esta situación, es claro que $\Expx{x}{\abs{\phi(B(t))}}$
+    está acotada. Calculemos ahora
+    $\Delta \phi$, donde
+    $$\phi(x) = \phi((x_0,y_0)) = \log\left(\sqrt{x_0^2 + y_0^2}\right)$$
     Tenemos que 
-    $$\frac{\partial^2 \phi}{\partial x^2} = \frac{y^2 - x^2}{(x^2 + y^2)^2}$$
+    $$\frac{\partial^2 \phi}{\partial x_0^2} = \frac{y_0^2 - x_0^2}{(x_0^2 + y_0^2)^2}$$
     y, por simetría,
-    $$\frac{\partial^2 \phi}{\partial y^2} = \frac{x^2 - y^2}{(x^2 + y^2)^2}$$
-    con lo cual $\Delta \phi(z) = 0$. Ahora resta ver que
-    $\Expx{z}{\abs{\phi(B(t))}} < \infty$.
-    
-
+    $$\frac{\partial^2 \phi}{\partial y_0^2} = \frac{x_0^2 - y_0^2}{(x_0^2 + y_0^2)^2}$$
+    con lo cual $\Delta \phi(x) = 0$.
     
     \item Para probar esto, desarrollemos $\Expx{x}{\phi(B(\tau))}$ utilizando la ley
     de la esperanza total:
