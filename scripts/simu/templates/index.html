@@ -1,0 +1,95 @@
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>   
+<script type="text/javascript" async 
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"> 
+</script>
+</head>
+
+<body>
+<h1>Graficador de movimientos brownianos (lineales) en $[0,1]$</h1>
+
+<ul>
+<li> El parámetro $t$ permite configurar el máximo tiempo permitido para el último cero $B_z$ de $B$.</li>
+<li> Presionando el botón <b>Graficar</b> se puede actualizar el gráfico tantas veces como se quiera, generando brownianos aleatorios hasta encontrar uno que satisfaga lo pedido.</li>
+<li> A la derecha del botón aparece primero la probabilidad de que el último cero sea a lo sumo $t$.</li>
+<li> Luego sigue una aproximación incremental a este valor derivado de la proporción de cuántos de los brownianos generados hasta el momento lo verifican.</li>
+</ul>
+  
+<table border="0" cellspacing="20">
+<tr>  
+<td>$t =$ <input size=5 value="0.5" type="text" id="x_txt" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'></input>
+<button id="btn_plot">Graficar</button></td>
+<td><div id= "prob"></p></td>
+<td><div id= "sampled"></p></td>
+</tr>
+</table>
+
+<div id="plot" margin="auto"></div>
+</body>
+
+<script>
+$('#btn_plot').click(function () {
+    $.ajax({
+        url: "plot",
+        data: {
+            x: $('#x_txt').val() || 0.5
+        },
+        type: "POST",
+        dataType: "json",
+        success: function (data) {
+            var image = data.image;
+            var prob = data.prob;
+            var frq = data.frq;
+            var n_x = data.n_x;
+            var d_x = data.d_x;
+            $('#plot').html('<img src="data:image/png;base64,' + image + '"/>');
+            $('#prob').html('$\\mathbb{P}(B_z \\leq t) \\approx' + prob + '$');
+            $('#sampled').html('$\\frac{\\#\\textrm{Graficados}}{\\#\\textrm{Generados}} = \\frac{' + n_x + '}{' + d_x + '} \\approx' + frq + '$');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);            
+        },
+        error: function (xhr, status) {
+            alert("ouch...");
+        },
+        complete: function (xhr, status) {
+        }
+    });
+});
+
+
+$(document).ready(function() {
+    $.ajax({
+        url: "plot",
+        data: {
+            x: $('#x_txt').val() || 0.5,
+            clear: 1
+        },
+        type: "POST",
+        dataType: "json",
+        success: function (data) {
+            var image = data.image;
+            var prob = data.prob;
+            var frq = data.frq;
+            var n_x = data.n_x;
+            var d_x = data.d_x;
+            $('#plot').html('<img src="data:image/png;base64,' + image + '"/>');
+            $('#prob').html('$\\mathbb{P}(B_z \\leq t) \\approx' + prob + '$');
+            $('#sampled').html('$\\frac{\\#\\textrm{Graficados}}{\\#\\textrm{Generados}} = \\frac{' + n_x + '}{' + d_x + '} \\approx' + frq + '$');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        },
+        error: function (xhr, status) {
+            alert("ouch...");
+        },
+        complete: function (xhr, status) {
+        }
+    });
+}); 
+</script>
+
+</html>
