@@ -157,6 +157,28 @@ $ $
             &=& \frac{\sqrt{n}}{Z_{n+1}} \left( Z_{\fnx} - \fnx - x  (Z_{n+1} - n) \right) \\
             &=& G_n(x)
     \end{eqnarray*}
+
+    \item[f.] En primera instancia,
+    $$\frac{Z_{n+1}}{n} = \underbrace{\frac{\sum_{i=1}^{n}{W_i}}{n}}_{X_n} + \underbrace{\frac{W_{n+1}}{n}}_{Y_n}$$
+    Por la Ley de los Grandes Números,
+    $$X_n \overset{P}{\longrightarrow} \Exp{W_1} = 1$$
+    Además, dado $\epsilon > 0$,
+    \begin{eqnarray*}
+        \Prob{\abs{Y_n} \geq \epsilon} &=& \Prob{\frac{W_{n+1}}{n} \geq \epsilon} \\
+            &=& \Prob{W_{n+1} \geq n \epsilon} \\
+            &=& 1 - \Prob{W_{n+1} < n \epsilon} \\
+            &=& 1 - \left(1 - e^{-n \epsilon}\right) \\
+            &=& e^{-n \epsilon} \\
+            &\underset{n \to \infty}{\longrightarrow}& 0
+    \end{eqnarray*}
+    De manera que
+    $$Y_n \overset{P}{\longrightarrow} 0$$
+    De esta forma,
+    $$\frac{Z_{n+1}}{n} = X_n + Y_n \overset{P}{\longrightarrow} 1$$
+
+    Por otra parte, observemos que $Z_{n+1} - Z_n = W_{n+1}$. Mediante un razonamiento análogo
+    al hecho para $Y_n$ anteriormente se puede ver que 
+    $$\frac{Z_{n+1} - Z_n}{n} \overset{P}{\longrightarrow} 0$$
 \end{enumerate}
 \end{proof}
 
