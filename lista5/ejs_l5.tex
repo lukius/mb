@@ -45,6 +45,10 @@
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\normi}[1]{\norm{#1}_{\infty}}
 \newcommand{\Sst}[1]{S_n^{*}(#1)}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\Dn}[1]{\tilde{D}_{#1 ,n}}
+\newcommand{\fnx}{\floor{nx}}
+\newcommand{\fnxp}{\floor{nx}+1}
 
 \newtheorem*{ej}{Ejercicio}
 
@@ -100,7 +104,59 @@ converge en distribución al \textsl{puente browniano}.
 \begin{proof}[Resoluci\'on]
 $ $ 
 \begin{enumerate}
-    \item[d)]
+    \item[d.] TBD
+
+    \item[e.] Formulemos primero la extensión de $\tilde{D}_n$ al intervalo $[0,1]$
+    a partir de la definición de $\Dn{k}$, $0 \leq k \leq n$:
+    $$\tilde{D}_n(x) = \Dn{\floor{nx}} + (nx - \floor{nx}) (\Dn{\floor{nx} + 1} - \Dn{\floor{nx}})$$
+    Tenemos además
+    $$S_n = \sum_{i = 1}^{n}{W_i - 1} = Z_n - n$$
+    y, para $x \in \mathbb{R}_{\geq 0}$,
+    $$S(x) = S_{\floor{x}} + (x - \floor{x}) (S_{\floor{x}+1} - S_{\floor{x}})$$
+    Finalmente,
+    $$\Sst{x} = \frac{S(nx)}{\sqrt{n}}$$
+
+    Desarrollemos ahora $\tilde{D}_n$ a partir de todo lo anterior:
+    \begin{eqnarray*}
+        \tilde{D}_n(x)
+            &=& \Dn{\floor{nx}} + (nx - \floor{nx}) \left(\Dn{\floor{nx} + 1} - \Dn{\floor{nx}}\right) \\
+            &=& \sqrt{n} \, \left(\frac{Z_{\fnx}}{Z_{n+1}} − \frac{\fnx}{n} \right) + \sqrt{n} \, (nx - \floor{nx}) \\
+            &\quad&  \left(\left(\frac{Z_{\fnxp}}{Z_{n+1}} − \frac{\fnxp}{n}\right) - \left(\frac{Z_{\fnx}}{Z_{n+1}} − \frac{\fnx}{n}\right)\right) \\
+            &=& \sqrt{n} \, \left(\frac{Z_{\fnx}}{Z_{n+1}} − \frac{\fnx}{n} \right) + \frac{\sqrt{n}}{Z_{n+1}} \, (nx - \floor{nx}) \\
+            &\quad&  \left(Z_{\fnxp} − Z_{n+1} \frac{\fnxp}{n} - Z_{\fnx} + Z_{n+1} \frac{\fnx}{n} \right) \\
+            &=& \sqrt{n} \, \left(\frac{Z_{\fnx}}{Z_{n+1}} − \frac{\fnx}{n} \right) + \frac{\sqrt{n}}{Z_{n+1}} \, (nx - \floor{nx}) 
+                \left(Z_{\fnxp} - Z_{\fnx} - \frac{Z_{n+1}}{n} \right) \\
+            &=& A_n(x) + B_n(x)
+    \end{eqnarray*}
+    donde
+    \begin{itemize}
+        \item $A_n(x) = \frac{\sqrt{n}}{Z_{n+1}} \, (nx - \floor{nx})  \left(Z_{\fnxp} - Z_{\fnx} - 1 \right)$ y
+        \item $B_n(x) =  \sqrt{n} \, \left(\frac{Z_{\fnx}}{Z_{n+1}} − \frac{\fnx}{n} \right) + \frac{\sqrt{n}}{Z_{n+1}} \, (nx - \floor{nx}) \left(1 - \frac{Z_{n+1}}{n}\right)$
+    \end{itemize}
+
+    Por otro lado, sea
+    $$C_n(x) = \frac{n}{Z_{n+1}} \left(\Sst{x} - x \left[ \Sst{1} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right)$$
+
+    Desarrollando $C_n$, tenemos
+
+    \begin{eqnarray*}
+        C_n(x) &=& \frac{n}{Z_{n+1}} \left(\frac{S(nx)}{\sqrt{n}} - x \left[ \frac{S(n)}{\sqrt{n}} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right) \\
+            &=& \frac{n}{Z_{n+1}} \left(\frac{S_{\floor{nx}} + (nx - \floor{nx}) (S_{\floor{nx}+1} - S_{\floor{nx}})}{\sqrt{n}} - x \left[ \frac{Z_n - n}{\sqrt{n}} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right) \\
+            &=& \frac{\sqrt{n}}{Z_{n+1}} \left( \left(S_{\floor{nx}} + (nx - \floor{nx}) (S_{\floor{nx}+1} - S_{\floor{nx}})\right) - x \left( Z_{n+1} - n \right) \right) \\
+            &=& \frac{\sqrt{n}}{Z_{n+1}} \left( \left(Z_{\floor{nx}} - \floor{nx} + (nx - \floor{nx}) (Z_{\floor{nx}+1} - Z_{\floor{nx}} - 1)\right) - x \left( Z_{n+1} - n \right) \right) \\
+            &=& A_n(x) + \underbrace{ \frac{\sqrt{n}}{Z_{n+1}} \left(Z_{\floor{nx}} - \floor{nx}  - x \left( Z_{n+1} - n \right)\right) }_{G_n(x)}
+    \end{eqnarray*}
+
+    Por ende, resta ver que $B_n(x) = G_n(x)$. Desarrollemos entonces $B_n$:
+
+    \begin{eqnarray*}    
+        B_n(x) &=& \sqrt{n} \, \left(\frac{Z_{\fnx}}{Z_{n+1}} − \frac{\fnx}{n} \right) + \frac{\sqrt{n}}{Z_{n+1}} \, (nx - \floor{nx}) \left(1 - \frac{Z_{n+1}}{n}\right) \\
+            &=& \frac{\sqrt{n}}{Z_{n+1}} \left( Z_{\fnx} - Z_{n+1} \frac{\fnx}{n} + (nx - \floor{nx}) \left(1 - \frac{Z_{n+1}}{n}\right) \right) \\
+            &=& \frac{\sqrt{n}}{Z_{n+1}} \left( Z_{\fnx} - Z_{n+1} \frac{\fnx}{n} + nx - x Z_{n+1} - \fnx + \fnx \frac{Z_{n+1}}{n} \right) \\
+            &=& \frac{\sqrt{n}}{Z_{n+1}} \left( Z_{\fnx} + nx - x Z_{n+1} - \fnx \right) \\
+            &=& \frac{\sqrt{n}}{Z_{n+1}} \left( Z_{\fnx} - \fnx - x  (Z_{n+1} - n) \right) \\
+            &=& G_n(x)
+    \end{eqnarray*}
 \end{enumerate}
 \end{proof}
 
