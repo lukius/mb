@@ -178,7 +178,33 @@ $ $
 
     Por otra parte, observemos que $Z_{n+1} - Z_n = W_{n+1}$. Mediante un razonamiento análogo
     al hecho para $Y_n$ anteriormente se puede ver que 
-    $$\frac{Z_{n+1} - Z_n}{n} \overset{P}{\longrightarrow} 0$$
+    $$\frac{Z_{n+1} - Z_n}{\sqrt{n}} \overset{P}{\longrightarrow} 0$$
+
+    \item[h.] 
+    Si notamos $X_n = W_n - 1$, tenemos que $\Exp{X_n} = \Exp{W_n} - 1 = 0$ y
+    \begin{eqnarray*}
+       \text{Var}[X_n] &=& \Exp{X_n^2} - \Exp{X_n}^2 \\
+            &=& \Exp{(W_n - 1)^2} \\
+            &=& \Exp{W_n^2 - 2W_n + 1} \\
+            &=& \Exp{W_n^2} - 2\Exp{W_n} + 1 \\
+            &=& 1
+    \end{eqnarray*}
+    En consecuencia, siendo $S_n$ definida en términos de $X_1,\dots,X_n$, estamos en las hipótesis del teorema 
+    de invariancia de Donsker. Éste nos permite concluir que
+    $$S_n^{*} \overset{\mathcal{D}}{\longrightarrow} B$$
+    en $C[0,1]$, siendo $B$ un movimiento browniano.
+
+    Ahora bien, del ítem e. sabemos que 
+    $$\tilde{D}_n(x) = \frac{n}{Z_{n+1}} \left(\Sst{x} - x \left[ \Sst{1} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right)$$
+    Mediante la observación anterior y los resultados del ítem f. se tiene que
+    $$\tilde{D}_n \overset{\mathcal{D}}{\longrightarrow} W$$
+    siendo $W(x) = B(x) - xB(1)$ el puente browniano.
+
+    Además, por el ítem d.,
+    $$\normi{\tilde{D}_n - D_n} \overset{P}{\longrightarrow} 0$$
+    con lo cual $D_n - \tilde{D}_n$ converge a la función constante 0 en probabilidad. Luego, por el teorema
+    de Slutsky generalizado a variables aleatorias a valores en $(C[0,1], \normi{\cdot})$,
+    $$D_n = \tilde{D}_n + (D_n - \tilde{D}_n) \overset{\mathcal{D}}{\longrightarrow} W + 0 = W$$
 \end{enumerate}
 \end{proof}
 
