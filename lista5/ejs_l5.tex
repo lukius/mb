@@ -1,0 +1,107 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{lastpage}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage[implicit=false]{hyperref}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+
+\newcommand{\at}{@}
+
+\title{Movimiento Browniano\\
+      \small{Ejercicios entregables - Lista 5}}
+\author{Lucio Santi\\
+        \texttt{lsanti\at dc.uba.ar}}
+\date{\today}
+
+\pagestyle{fancyplain} 
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage/\pageref{LastPage}}
+\lhead{}
+\chead{}
+\rhead{}
+
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\newcommand{\Sig}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\SigAlg}[1]{\ensuremath{\sigma\left(#1\right)}}
+\newcommand{\Mart}[2]{\ensuremath{\left(#1_n, \Sig{#2}_n\right)}}
+\newcommand{\Exp}[1]{\ensuremath{\textrm{E}\left[#1\right]}}
+\newcommand{\ExpC}[2]{\ensuremath{\textrm{E}\left[#1 \, | \, #2\right]}}
+\newcommand{\Prob}[1]{\ensuremath{\mathbb{P} \left( #1 \right)}}
+\newcommand{\Probx}[2]{\ensuremath{\mathbb{P}_{#1} \left( #2 \right)}}
+\newcommand{\Expx}[2]{\ensuremath{\textrm{E}_{#1}\left[#2\right]}}
+\newcommand{\ExpxC}[3]{\ensuremath{\textrm{E}_{#1}\left[#2 \, | \, #3\right]}}
+\newcommand{\Ev}[1]{\ensuremath{\left\{ #1 \right\}}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normi}[1]{\norm{#1}_{\infty}}
+\newcommand{\Sst}[1]{S_n^{*}(#1)}
+
+\newtheorem*{ej}{Ejercicio}
+
+\begin{document}
+\maketitle
+
+\begin{ej} 
+Sean $X_1, X_2, \dots$ variables aleatorias i.i.d. con distribución $F$ y sea
+$$\hat{F}_n(x) = \#\left\{m \leq n ∶  X_m \leq x \right\}$$
+El objetivo de este ejercicio es probar que
+$$D_n(x) = \sqrt{n} (\hat{F}_n(x) − F(x))$$
+converge en distribución al \textsl{puente browniano}.
+
+\begin{enumerate}[a.]
+    \item Observar que, por la Ley de los Grandes Números,
+    $\abs{\hat{F}_n(x) − F (x)} \to 0$ para todo $0 < x < 1$.
+
+    \item Utilizando la transformación $Y_k = F(X_k)$ mostrar que basta
+    considerar el caso en que $F$ es la distribución uniforme en $(0, 1)$.
+
+    \item Sean $Y_1, Y_2, \dots$ i.i.d. $\mathcal{U}(0, 1)$ y
+    $Y_{(1)} < Y_{(2)} < \dots$ la muestra ordenada. Sean
+    $W_1, W_2, \dots$ i.i.d. $\mathcal{E}(1)$ y
+    $Z_n = W_1 + \dots + W_n$. Probar que
+    $(Y_{(1)}, \dots, Y_{(n)})$ y $(Z_1/Z_{n+1}, \dots, Z_n/Z_{n+1})$
+    tienen la misma distribución. Sugerencia: hallar la densidad de
+    $(Y_{(1)}, \dots, Y_{(n)})$ y de $r(Z_1, \dots, Z_{n+1})$, donde
+    $$r(z_1, \dots, z_{n+1}) = (z_1/z_{n+1}, \dots, z_n/z_{n+1}, z_{n+1})$$
+
+    \item Sea $\tilde{D}_{k,n} = \sqrt{n} (Z_k/Z_{n+1} − k/n)$ y extender al
+    $[0, 1]$ interpolando linealmente. Probar que
+    $$\normi{\tilde{D}_n - D_n} \to 0$$
+    en probabilidad cuando $n \to \infty$.
+
+    \item Sea $S_n = S_n(W_1 − 1, \dots, W_n − 1)$ y $S_n^{*}$ definidos como
+    en la clase. Mostrar que
+    $$\tilde{D}_n(x) = \frac{n}{Z_{n+1}} \left(\Sst{x} - x \left[ \Sst{1} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right)$$
+
+    \item Probar que $Z_{n+1}/n \to 1$ y 
+    $(Z_{n+1} - Z_n)/\sqrt{n} \to 0$
+    en probabilidad.
+
+    \item Asumir (o probar) que el Teorema de Slutsky vale también para
+    sucesiones de variables aleatorias a valores en espacios métricos.
+
+    \item Probar que los procesos $(D_n(x), 0 \leq x \leq 1)_{n \geq 1}$
+    convergen al proceso $(W(t), 0 \leq t \leq 1)$ dado por
+    $W(t) = B(t) − tB(1)$,
+    denominado \textsl{puente browniano} ($B$ es un movimiento browniano).
+\end{enumerate}
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+$ $ 
+\begin{enumerate}
+    \item[d)]
+\end{enumerate}
+\end{proof}
+
+\end{document}
