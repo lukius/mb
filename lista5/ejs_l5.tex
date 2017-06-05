@@ -57,7 +57,7 @@
 
 \begin{ej} 
 Sean $X_1, X_2, \dots$ variables aleatorias i.i.d. con distribución $F$ y sea
-$$\hat{F}_n(x) = \#\left\{m \leq n ∶  X_m \leq x \right\}$$
+$$\hat{F}_n(x) = \frac{1}{n} ~\#\left\{m \leq n ∶  X_m \leq x \right\}$$
 El objetivo de este ejercicio es probar que
 $$D_n(x) = \sqrt{n} (\hat{F}_n(x) − F(x))$$
 converge en distribución al \textsl{puente browniano}.
@@ -104,19 +104,33 @@ converge en distribución al \textsl{puente browniano}.
 \begin{proof}[Resoluci\'on]
 $ $ 
 \begin{enumerate}
-    \item[d.] TBD
-
-    \item[e.] Formulemos primero la extensión de $\tilde{D}_n$ al intervalo $[0,1]$
+    \item[d.] Formulemos primero la extensión de $\tilde{D}_n$ al intervalo $[0,1]$
     a partir de la definición de $\Dn{k}$, $0 \leq k \leq n$:
     $$\tilde{D}_n(x) = \Dn{\floor{nx}} + (nx - \floor{nx}) (\Dn{\floor{nx} + 1} - \Dn{\floor{nx}})$$
-    Tenemos además
-    $$S_n = \sum_{i = 1}^{n}{W_i - 1} = Z_n - n$$
-    y, para $x \in \mathbb{R}_{\geq 0}$,
-    $$S(x) = S_{\floor{x}} + (x - \floor{x}) (S_{\floor{x}+1} - S_{\floor{x}})$$
-    Finalmente,
-    $$\Sst{x} = \frac{S(nx)}{\sqrt{n}}$$
 
-    Desarrollemos ahora $\tilde{D}_n$ a partir de todo lo anterior:
+    Observemos que basta probar que 
+    $$\Dn{k} - D_n(k/n) \overset{P}{\longrightarrow} 0$$
+
+    En efecto, dado $x \in [0,1]$, se tiene que
+    $$\frac{\fnx}{n} \leq x < \frac{\fnxp}{n}$$
+    y 
+    $$\frac{\fnxp}{n} - \frac{\fnx}{n} = \frac{1}{n} \to 0$$
+    cuando $n \to \infty$, por lo que $\tilde{D}_n(x) - \Dn{\fnx} \to 0$.\\
+
+    Por el ítem b. podemos asumir que $F$ es la distribución uniforme en $(0,1)$, de manera que
+    $$F(k/n) = k/n$$
+    Luego, dado $\epsilon > 0$,
+    \begin{eqnarray*}
+        \Prob{\abs{\Dn{k} - D_n(k/n)} \geq \epsilon}
+            &=& \Prob{\sqrt{n}~\abs{\left(Z_k/Z_{n+1} − k/n\right) - \left(\hat{F}_n(k/n) − F(k/n)\right)} \geq \epsilon} \\
+            &=& \Prob{\abs{Z_k/Z_{n+1} - \hat{F}_n(k/n)} \geq \frac{\epsilon}{\sqrt{n}}} \\
+            &=& P_{k,n}
+    \end{eqnarray*}
+    Del ítem c. tenemos que $Z_k/Z_{n+1} \sim Y_{(k)}$ y por ende, por la definición de $\hat{F}_n$,
+    $$Z_k/Z_{n+1} - \hat{F}_n(k/n) \overset{\mathcal{D}}{\longrightarrow} 0$$
+    Luego, $P_{k,n} \to 0$.
+
+    \item[e.] Desarrollemos $\tilde{D}_n$ a partir de la interpolación mostrada en el ítem previo:
     \begin{eqnarray*}
         \tilde{D}_n(x)
             &=& \Dn{\floor{nx}} + (nx - \floor{nx}) \left(\Dn{\floor{nx} + 1} - \Dn{\floor{nx}}\right) \\
@@ -136,8 +150,14 @@ $ $
 
     Por otro lado, sea
     $$C_n(x) = \frac{n}{Z_{n+1}} \left(\Sst{x} - x \left[ \Sst{1} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right)$$
+    Además,
+    $$S_n = \sum_{i = 1}^{n}{W_i - 1} = Z_n - n$$
+    y, para $x \in \mathbb{R}_{\geq 0}$,
+    $$S(x) = S_{\floor{x}} + (x - \floor{x}) (S_{\floor{x}+1} - S_{\floor{x}})$$
+    y
+    $$\Sst{x} = \frac{S(nx)}{\sqrt{n}}$$
 
-    Desarrollando $C_n$, tenemos
+    Desarrollando $C_n$ utilizando lo anterior, tenemos
 
     \begin{eqnarray*}
         C_n(x) &=& \frac{n}{Z_{n+1}} \left(\frac{S(nx)}{\sqrt{n}} - x \left[ \frac{S(n)}{\sqrt{n}} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right) \\
@@ -196,7 +216,7 @@ $ $
 
     Ahora bien, del ítem e. sabemos que 
     $$\tilde{D}_n(x) = \frac{n}{Z_{n+1}} \left(\Sst{x} - x \left[ \Sst{1} + \frac{Z_{n+1} - Z_n}{\sqrt{n}} \right] \right)$$
-    Mediante la observación anterior y los resultados del ítem f. se tiene que
+    Mediante la observación anterior, los resultados del ítem f. y el teorema de Slutsky se tiene que
     $$\tilde{D}_n \overset{\mathcal{D}}{\longrightarrow} W$$
     siendo $W(x) = B(x) - xB(1)$ el puente browniano.
 
