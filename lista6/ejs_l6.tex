@@ -1,0 +1,82 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{lastpage}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage[implicit=false]{hyperref}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+
+\newcommand{\at}{@}
+
+\title{Movimiento Browniano\\
+      \small{Ejercicios entregables - Lista 6}}
+\author{Lucio Santi\\
+        \texttt{lsanti\at dc.uba.ar}}
+\date{\today}
+
+\pagestyle{fancyplain} 
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage/\pageref{LastPage}}
+\lhead{}
+\chead{}
+\rhead{}
+
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\newcommand{\Sig}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\SigAlg}[1]{\ensuremath{\sigma\left(#1\right)}}
+\newcommand{\Mart}[2]{\ensuremath{\left(#1_n, \Sig{#2}_n\right)}}
+\newcommand{\Exp}[1]{\ensuremath{\textrm{E}\left[#1\right]}}
+\newcommand{\ExpC}[2]{\ensuremath{\textrm{E}\left[#1 \, | \, #2\right]}}
+\newcommand{\Prob}[1]{\ensuremath{\mathbb{P} \left( #1 \right)}}
+\newcommand{\Probx}[2]{\ensuremath{\mathbb{P}_{#1} \left( #2 \right)}}
+\newcommand{\Expx}[2]{\ensuremath{\textrm{E}_{#1}\left[#2\right]}}
+\newcommand{\ExpxC}[3]{\ensuremath{\textrm{E}_{#1}\left[#2 \, | \, #3\right]}}
+\newcommand{\Ev}[1]{\ensuremath{\left\{ #1 \right\}}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normi}[1]{\norm{#1}_{\infty}}
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Grad}[1]{\nabla #1}
+\newcommand{\Lap}[1]{\Delta #1 }
+\newcommand{\Dif}[1]{\textrm{d} #1}
+
+\newtheorem*{ej}{Ejercicio}
+
+\begin{document}
+\maketitle
+
+\begin{ej}[7.1 - Mörters y Peres] 
+Sea $F \in D[0,1]$. Probar que la integral de Paley-Wiener,
+$$\int_0^1{F' \Dif{B}}$$
+coincide casi seguramente con la integral estocástica.
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+
+\end{proof}
+
+%%%%
+
+\begin{ej}[Fórmula de Itô multidimensional] 
+Sea $B$ un movimiento browniano $d$ dimensional y $f : \Real^d \to \Real$ dos veces continuamente
+diferenciable y tal que
+$$\Exp{ \int_0^t{\abs{\Grad{f(B(s))}}}^2 \Dif{s}} < \infty$$
+Probar que, para cualquier $0 \leq s \leq t$,
+$$f(B(s)) - f(B(0)) = \int_0^s{\Grad{f(B(u))} \cdot \Dif{B(u)}} + \frac{1}{2} \int_0^s{\Lap{f(B(u))} \Dif{u}}$$
+\end{ej}
+
+\begin{proof}[Resoluci\'on]
+
+\end{proof}
+
+\end{document}
