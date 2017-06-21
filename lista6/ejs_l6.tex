@@ -57,6 +57,8 @@
 \newcommand{\Der}[2]{\frac{\partial f}{\partial x_{#1}}(#2)}
 \newcommand{\DerS}[3]{\frac{\partial^2 f}{\partial x_{#1} ~\partial x_{#2}}(#3)}
 \newcommand{\DerSE}[2]{\frac{\partial^2 f}{\partial x_{#1}^2}(#2)}
+\newcommand{\LL}{\mathbb{L}^2}
+\newcommand{\Ind}[1]{\mathbb{1}_{#1}}
 
 \newtheorem*{ej}{Ejercicio}
 
@@ -70,6 +72,34 @@ coincide casi seguramente con la integral estocástica.
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
+Si $F'\in \LL = \LL(0,1)$, la definición de la integral estocástica nos dice que
+
+\begin{equation}
+\int_0^1{F'(s)~\Dif{B(s)}} = \int_0^{\infty}{F'(s) ~\Ind{\{s < 1\}} ~\Dif{B(s)}}
+\label{eq:1}
+\end{equation}
+
+Sea $(F'_n)_{n \geq 1}$ una sucesión de procesos escalonados (determinísticos) tal que
+
+$$F'_n(s) = \sum_{i=1}^{2^n}{\Ind{((i-1)~2^{-n}, i~2^{-n}]}(s) ~ 2^n \left(F(i ~2^{-n}) - F((i-1) ~2^{-n})\right)}$$
+
+Al ser cada $F'_n$ continuo a izquierda, se tiene que también es progresivamente medible. Además, para
+cada $s \in [0,1]$, es claro que $F'_n(s) \overset{n \to \infty}{\longrightarrow} F'(s)$. De esta forma,
+se tiene que 
+\begin{eqnarray*}
+    \norm{F'_n - F'}_2 &=& \Exp{\int_0^1{(F'_n(s) - F'(s))^2 ~ \Dif{s}}} \\
+        &=& \int_0^1{(F'_n(s) - F'(s))^2 ~ \Dif{s}} \\
+        &\overset{n \to \infty}{\longrightarrow}& 0
+\end{eqnarray*}
+Luego, como consecuencia del Teorema 7.6 del libro (también estudiado en clase),
+$$\lim_{n \to \infty}{\int_0^{\infty}{F'_n(s) ~ \Dif{B(s)}}} = (\ref{eq:1}) = \int_0^{\infty}{F'(s) ~\Ind{\{s < 1\}} ~\Dif{B(s)}}$$
+Y desplegando ahora la definición de la integral para procesos escalonados,
+\begin{eqnarray*}
+    \lim_{n \to \infty}{\int_0^{\infty}{F'_n(s) ~ \Dif{B(s)}}} &=&
+    \lim_{n \to \infty}{\sum_{i=1}^{2^n}{2^n \left(F(i ~2^{-n}) - F((i-1) ~2^{-n})\right)} \left(B(i ~2^{-n}) - B((i-1) ~2^{-n}) \right)} \\
+    &=& \lim_{n \to \infty}{2^n \sum_{i=1}^{2^n}{\left(F(i ~2^{-n}) - F((i-1) ~2^{-n})\right)} \left(B(i ~2^{-n}) - B((i-1) ~2^{-n}) \right)} \\
+    &=& \int_0^1{F' ~\Dif{B}}
+\end{eqnarray*}
 
 \end{proof}
 
