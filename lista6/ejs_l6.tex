@@ -48,7 +48,15 @@
 \newcommand{\Real}{\mathbb{R}}
 \newcommand{\Grad}[1]{\nabla #1}
 \newcommand{\Lap}[1]{\Delta #1 }
-\newcommand{\Dif}[1]{\textrm{d} #1}
+\newcommand{\Dif}[1]{d #1}
+\newcommand{\IntB}[1]{\int_0^t{#1~\Dif{B}}}
+\newcommand{\IntBu}[1]{\int_0^t{#1~\Dif{B(u)}}}
+\newcommand{\IntBiu}[1]{\int_0^t{#1~\Dif{B_i(u)}}}
+\newcommand{\IntBju}[1]{\int_0^t{#1~\Dif{B_j(u)}}}
+\newcommand{\vx}[1]{\mathbf{#1}}
+\newcommand{\Der}[2]{\frac{\partial f}{\partial x_{#1}}(#2)}
+\newcommand{\DerS}[3]{\frac{\partial^2 f}{\partial x_{#1} ~\partial x_{#2}}(#3)}
+\newcommand{\DerSE}[2]{\frac{\partial^2 f}{\partial x_{#1}^2}(#2)}
 
 \newtheorem*{ej}{Ejercicio}
 
@@ -57,7 +65,7 @@
 
 \begin{ej}[7.1 - Mörters y Peres] 
 Sea $F \in D[0,1]$. Probar que la integral de Paley-Wiener,
-$$\int_0^1{F' \Dif{B}}$$
+$$\int_0^1{F' ~\Dif{B}}$$
 coincide casi seguramente con la integral estocástica.
 \end{ej}
 
@@ -70,13 +78,82 @@ coincide casi seguramente con la integral estocástica.
 \begin{ej}[Fórmula de Itô multidimensional] 
 Sea $B$ un movimiento browniano $d$ dimensional y $f : \Real^d \to \Real$ dos veces continuamente
 diferenciable y tal que
-$$\Exp{ \int_0^t{\abs{\Grad{f(B(s))}}}^2 \Dif{s}} < \infty$$
+$$\Exp{ \int_0^t{\abs{\Grad{f(B(s))}}}^2 ~\Dif{s}} < \infty$$
 Probar que, para cualquier $0 \leq s \leq t$,
-$$f(B(s)) - f(B(0)) = \int_0^s{\Grad{f(B(u))} \cdot \Dif{B(u)}} + \frac{1}{2} \int_0^s{\Lap{f(B(u))} \Dif{u}}$$
+$$f(B(s)) - f(B(0)) = \int_0^s{\Grad{f(B(u))} ~\Dif{B(u)}} + \frac{1}{2} \int_0^s{\Lap{f(B(u))} ~\Dif{u}}$$
 \end{ej}
 
 \begin{proof}[Resoluci\'on]
+En primera instancia, recordemos que, si $H(t) = \left(H_1(t),\dots,H_d(t)\right)$,
+$$\IntB{H} := \sum_{i = 1}^{d}{\IntBiu{H_i(u)}}$$
 
+Consideremos el desarrollo en serie de Taylor de $f$ alrededor de $\vx{x} \in \Real^d$:
+$$f(\vx{y}) = f(\vx{x}) + \Grad{f(\vx{x})} \cdot (\vx{y} - \vx{x})
+    + \frac{1}{2} (\vx{y} - \vx{x})^T ~ H_f(\vx{x}) ~ (\vx{y} - \vx{x}) 
+    + R(\vx{y}, \vx{x})$$
+donde $H_f$ es la matriz hessiana de derivadas segundas de $f$ y $R(\vx{y}, \vx{x}) \to 0$ cuando $\vx{y} \to \vx{x}$.\\
+
+Sea $\omega(\delta, M)$ el módulo de continuidad de $H_f$,
+$$\omega(\delta, M) = \underset{\substack{\vx{x_1}, \vx{x_2} ~ \in ~ [-M,M]^d, \\ \abs{\vx{x_1} - \vx{x_2}} < \delta}}
+    {\sup} ~ \norm{H_f(\vx{x_1}) - H_f(\vx{x_2})}$$
+Luego, si $\vx{x}, \vx{y} ~ \in ~ [-M,M]^d$ y $\abs{\vx{x} - \vx{y}} < \delta$,
+$$\abs{f(\vx{y}) - f(\vx{x}) - \Grad{f(\vx{x})} \cdot (\vx{y} - \vx{x}) -\frac{1}{2} (\vx{y} - \vx{x})^T ~ H_f(\vx{x}) ~ (\vx{y} - \vx{x})}
+    \leq \omega(\delta, M) \abs{\vx{y} - \vx{x}}^2$$
+Sea $p_n$ una sucesión de particiones de $[0,t]$ tal que $\abs{p_n} \to 0$:
+$$p_n : 0 = t_0^n < t_1^n < \dots < t_{m_n}^n = t$$
+Notando $B_i = (B_1(t_i^n), \dots, B_d(t_i^n))$, $0 \leq i \leq m_n$, consideremos
+$$\delta_B = \underset{0 \leq i < m_n}{\max} ~ \abs{B_{i+1} - B_i}
+\textrm{ y }
+M_B = \underset{0 \leq u \leq t}{\max} ~ \abs{B(u)}$$
+Luego, para cada $0 \leq i < m_n$, se tiene
+\begin{multline*}
+    \abs{f(B_{i+1}) - f(B_i) - \Grad{f(B_i)} \cdot (B_{i+1} - B_i) -\frac{1}{2} (B_{i+1} - B_i)^T ~ H_f(B_i) ~ (B_{i+1} - B_i)} \\
+    \leq \omega(\delta_B, M_B) \abs{B_{i+1} - B_i}^2
+\end{multline*}
+De esta forma, sumando sobre $i$ y como consecuencia de la desigualdad triangular, se observa que
+$$\abs{A - B - \frac{1}{2} ~C} \leq \omega(\delta_B, M_B) ~ D$$
+en donde
+\begin{itemize}
+    \item $A = \displaystyle \sum_{i = 0}^{m_n - 1}{f(B_{i+1}) - f(B_i)} = f(B(t)) - f(B(0))$,
+
+    \item $B = \displaystyle \sum_{i = 0}^{m_n - 1}{\Grad{f(B_i)} \cdot (B_{i+1} - B_i)}$,
+
+    \item $C = \displaystyle \sum_{i = 0}^{m_n - 1}{(B_{i+1} - B_i)^T ~ H_f(B_i) ~ (B_{i+1} - B_i)}$, y
+
+    \item $D = \displaystyle \sum_{i = 0}^{m_n - 1}{\abs{B_{i+1} - B_i}^2} \overset{P}{\longrightarrow} dt$ (puesto que cada componente
+    converge a $t$).
+\end{itemize}
+
+En cuanto a $B$, observemos que 
+$$B  = \sum_{i = 0}^{m_n - 1}{\sum_{j = 1}^{d}{\Der{j}{B_i} (B_j(t_{i+1}^n) - B_j(t_i^n))}} 
+     = \sum_{j = 1}^{d}{\underbrace{\sum_{i = 0}^{m_n - 1}{\Der{j}{B_i} (B_j(t_{i+1}^n) - B_j(t_i^n))}}_{ \underset{L^2(\Omega)}{\longrightarrow} \IntBju{\Der{j}{B(u)}}} }$$
+de manera que
+$$B \underset{L^2(\Omega)}{\longrightarrow} \IntBu{\Grad{f(B(u))}}$$
+Desarrollemos ahora $C$, notando $\Delta_j^i = B_j(t_{i+1}^n) - B_j(t_i^n)$:
+\begin{eqnarray*}
+    C &=& \sum_{i = 0}^{m_n - 1}{(B_{i+1} - B_i)^T ~ H_f(B_i) ~ (B_{i+1} - B_i)} \\
+    &=& \sum_{i = 0}^{m_n - 1}{ \sum_{j=1}^{d}{\Delta_j^i \sum_{k=1}^{d}{ \Delta_k^i ~\DerS{k}{j}{B(t_i^n)}} }  } \\
+    &=& \sum_{i = 0}^{m_n - 1}{\sum_{j,k=1}^{d}{\Delta_j^i ~ \Delta_k^i ~\DerS{k}{j}{B(t_i^n)}}} \\
+    &=& \sum_{j,k=1}^{d}{\underbrace {\sum_{i = 0}^{m_n - 1}{\Delta_j^i ~ \Delta_k^i ~\DerS{k}{j}{B(t_i^n)}}}_{C_{j,k}}}
+\end{eqnarray*}
+Como consecuencia del lema visto en clase, se tiene que $C_{j,k} \to 0$ en $L^2(\Omega)$ si $j \neq k$ puesto que 
+$B_j$ y $B_k$ son brownianos independientes. Por otro lado, cuando $j = k$, tenemos
+\begin{eqnarray*}
+    C_{j,j} &=& \sum_{i = 0}^{m_n - 1}{{\Delta_j^i}^2 ~\DerSE{j}{B(t_i^n)}} \\
+    &\overset{P}{\longrightarrow}& \int_0^t{\DerSE{j}{B(u)} ~du}
+\end{eqnarray*}
+
+Así, se observa que
+$$C \overset{P}{\longrightarrow} \sum_{j=1}^{d}{\int_0^t{\DerSE{j}{B(u)} ~du}} = \int_0^t{\Lap{f(B(u))} ~\Dif{u}}$$
+
+A partir de todo lo anterior, y siendo $\omega(\delta_B, M_B) \to 0$, casi seguramente
+vale que
+
+$$f(B(t)) - f(B(0)) = \int_0^t{\Grad{f(B(u))} ~\Dif{B(u)}} + \frac{1}{2} \int_0^t{\Lap{f(B(u))} ~\Dif{u}}$$
+
+Observar que este argumento prueba la validez de la fórmula multidimensional de Itô para $t$ fijo. Para probar que el resultado
+vale para cualquier $0 \leq s \leq t$, puede argumentarse que vale casi seguramente para todo tiempo racional en $[0,t]$ y 
+concluir su validez en todo el intervalo por continuidad casi segura de cada miembro de la fórmula.
 \end{proof}
 
 \end{document}
