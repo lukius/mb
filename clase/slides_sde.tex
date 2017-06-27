@@ -18,12 +18,9 @@
 \usepgfplotslibrary{dateplot}
 
 \usepackage{xspace}
-\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\newcommand{\mmo}{$\mu$-Modelica }
-\newcommand{\dqrel}{\ensuremath{\Delta \textrm{Q}_{\textrm{Rel}}}}
-\newcommand{\dqmin}{\ensuremath{\Delta \textrm{Q}_{\textrm{Min}}}}
-\newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
+
+\newcommand{\at}{@}
 \newcommand\encircle[1]{%
   \tikz[baseline=(X.base)] 
     \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
@@ -40,7 +37,7 @@
 
 \title{Simulación Numérica de \\ Ecuaciones Diferenciales Estocásticas}
 \date{3 de julio de 2017}
-\author{Lucio Santi - \texttt{lsanti@dc.uba.ar}}
+\author{Lucio Santi - \texttt{lsanti\at dc.uba.ar}}
 %\institute{Universidad de Buenos Aires}
 \titlegraphic{%
   %\mbox{}%
@@ -58,7 +55,7 @@
                       Universidad de Buenos Aires
 }
 
-\setbeamertemplate{frame footer}{Simulación numérica de SDEs - Lucio Santi}
+\setbeamertemplate{frame footer}{Simulación numérica de EDSs - Lucio Santi}
 % \metroset{block=fill}
 \setbeamertemplate{itemize subitem}[triangle]
 
@@ -74,7 +71,47 @@
 \end{frame}
 
 
-\section{TBD}
+\section{Introducción}
+
+\subsection{Motivación}
+
+\subsection{Definiciones}
+
+%%%%
+
+\section{Métodos de resolución}
+
+\subsection{Generalidades}
+
+% definiciones generales
+% estabilidad y convergencia
+
+\subsection{Método de Euler-Maruyama}
+
+% repaso euler determinístico
+% definición
+% propiedades
+% alguna prueba de estabilidad/convergencia?
+
+\subsection{Método de Milstein}
+
+% derivación (expansión ito-taylor) => definición
+% propiedades
+
+
+%%%% 
+
+\section{Implementación y validación}
+
+% demo en vivo
+
+\subsection{Caso de estudio}
+
+\subsection{Resultados}
+
+%%%% 
+
+\section{Conclusiones}
 
 
 
