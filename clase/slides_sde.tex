@@ -1,0 +1,94 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[progressbar=frametitle]{metropolis}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[export]{adjustbox}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\newcommand{\mmo}{$\mu$-Modelica }
+\newcommand{\dqrel}{\ensuremath{\Delta \textrm{Q}_{\textrm{Rel}}}}
+\newcommand{\dqmin}{\ensuremath{\Delta \textrm{Q}_{\textrm{Min}}}}
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+
+\setbeamercolor{blockbg}{fg=normal text.fg,bg=normal text.bg!90!fg}
+
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{burntorange}{rgb}{0.8, 0.33, 0.0}
+
+\newenvironment{colorblock}[1]{%
+  \setbeamercolor{block title}{fg=normal text.fg,bg=burntorange!40}
+  \setbeamercolor{block body}{fg=normal text.fg,bg=burntorange!15}
+  \begin{block}{#1}}{\end{block}}
+
+\title{Simulación Numérica de \\ Ecuaciones Diferenciales Estocásticas}
+\date{3 de julio de 2017}
+\author{Lucio Santi - \texttt{lsanti@dc.uba.ar}}
+%\institute{Universidad de Buenos Aires}
+\titlegraphic{%
+  %\mbox{}%
+%   \vspace{-0.4cm} 
+ %  \tikz\node[opacity=0.2] {\includegraphics[height=3.5cm]{images/fermilab_logo.png}};
+   
+  %\hspace{3cm} \quad
+    %\vspace{-9.9cm}
+    \vspace{-3.65cm} 
+    \hspace{5.5cm} 
+     \tikz\node[opacity=0.13] {\includegraphics[height=5.8cm]{images/uba_logo.jpg}};
+}
+%\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo}}
+\institute[shortinst]{Facultad de Ciencias Exactas y Naturales \\ %
+                      Universidad de Buenos Aires
+}
+
+\setbeamertemplate{frame footer}{Simulación numérica de SDEs - Lucio Santi}
+% \metroset{block=fill}
+\setbeamertemplate{itemize subitem}[triangle]
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Agenda}
+  \setbeamertemplate{section in toc}[circle]
+  \setbeamertemplate{subsection in toc}[ball unnumbered]
+  %\\tableofcontents[hideallsubsections]
+   \tableofcontents[subsubsectionstyle=hide]
+\end{frame}
+
+
+\section{TBD}
+
+
+
+%----------------------------
+\begin{frame}[standout]
+  Gracias!\\
+  
+  Preguntas?
+\end{frame}
+
+\nocite{*}
+\begin{frame}[allowframebreaks]{Referencias}
+  \bibliography{slides_sde}
+  \bibliographystyle{abbrv}
+\end{frame}
+
+\end{document}
