@@ -15,6 +15,8 @@
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[export]{adjustbox}
+\usepackage{xcolor}
+\usepackage{color}
 \usepgfplotslibrary{dateplot}
 
 \usepackage{xspace}
@@ -56,8 +58,15 @@
 }
 
 \setbeamertemplate{frame footer}{Simulación numérica de EDSs - Lucio Santi}
-% \metroset{block=fill}
+\metroset{block=fill}
 \setbeamertemplate{itemize subitem}[triangle]
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Dif}[1]{d #1}
+\newcommand{\Intt}[4]{\int_{#1}^{#2}{#3~\Dif{#4}}}
+\newcommand{\IntB}[1]{\int_0^t{#1~\Dif{B}}}
+\newcommand{\IntBu}[1]{\int_0^t{#1~\Dif{B(u)}}}
+
 
 \begin{document}
 
@@ -70,12 +79,84 @@
    \tableofcontents[subsubsectionstyle=hide]
 \end{frame}
 
-
 \section{Introducción}
 
 \subsection{Motivación}
 
+\frame
+{
+    \frametitle{Motivación}
+
+    \begin{itemize}
+        \item Las \textbf{ecuaciones diferenciales estocásticas} (EDSs) son ecuaciones diferenciales 
+        en las que al menos uno de sus términos es un proceso estocástico.
+        \item Surgen como mecanismo de modelado
+        en contextos diversos (e.g., biología, astronomía, finanzas y otros).
+        \item Típicamente es difícil (sino imposible) encontrar soluciones analíticas.
+        \item Por ende, es fundamental la aproximación de soluciones mediante \textbf{simulación numérica}.
+        \item En esta exposición vamos a estudiar dos métodos numéricos de resolución de EDSs y algunas 
+        de sus propiedades teóricas.
+    \end{itemize}   
+}
+
 \subsection{Definiciones}
+
+\frame
+{
+    \frametitle{Ecuación diferencial estocástica}
+
+    %  X(t) = \onslide<2-> \underbrace{ \onslide<1-> X(0) \onslide<2-> }_{\text{valor inicial}} \onslide<1->
+    \begin{block}{Proceso de Itô (unidimensional) $X = \{X(t), t \geq 0\}$}
+    \begin{displaymath}
+        X(t) = X(0) + \Intt{0}{t}{a(s,X(s))}{s} + \Intt{0}{t}{b(s,X(s))}{B(s)}
+    \end{displaymath}
+    \end{block}
+    \vspace{-0.1cm}
+    \begin{itemize}
+        \item<2-> $X(0)$ es el valor inicial; puede ser aleatorio.
+        \item<3-> $a : \Real^2 \to \Real$ es el coeficiente de deriva (\textsl{drift}).
+        \item<4-> $b : \Real^2 \to \Real$ es el coeficiente de difusión.
+        \item<5-> $B = \{B(t), t \geq 0\}$ es el movimiento browniano lineal conductor de $X$.
+    \end{itemize}
+
+    \uncover<6->
+    {
+    \begin{block}{Ecuación diferencial estocástica (de Itô)}
+    \begin{displaymath}
+        \Dif{X(t)} = a(t,X(t)) ~\Dif{t} + b(t,X(t)) ~\Dif{B(t)}
+    \end{displaymath}
+    \end{block}
+    }
+}
+
+\frame
+{
+    \frametitle{Aproximaciones de tiempo discreto}
+
+    \begin{itemize}
+        \item Existen distintas estrategias de resolución numérica de EDSs.
+        \item La más eficiente y generalmente aplicable consiste en simular
+        caminos muestrales (\textsl{sample paths}) mediante \textbf{aproximaciones 
+        de tiempo discreto}.
+    \end{itemize}
+
+    \uncover<2->
+    {
+        \begin{block}{Discretización temporal}
+        Una \textbf{discretización} del intervalo $[t_0, T]$ viene dada por 
+        $N$ instantes
+        $$t_0 = \tau_0 < \tau_1 < \dots < \tau_N = T$$
+        \end{block}
+    }
+
+        \begin{itemize}
+            \item<3-> $h_n = \tau_{n+1} - \tau_n$ es el $n$-ésimo incremento.
+            \item<4-> En las discretizaciones de tiempo equidistante, se toma $h = h_n = \frac{T - t_0}{N}$
+            con $N$ suficientemente grande para que $0 < h < 1$.
+            \uncover<5->{$\Rightarrow$ $\tau_n = t_0 + nh$}
+        \end{itemize}
+}
+
 
 %%%%
 
