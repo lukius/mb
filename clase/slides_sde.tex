@@ -37,6 +37,7 @@
   \setbeamercolor{block body}{fg=normal text.fg,bg=burntorange!15}
   \begin{block}{#1}}{\end{block}}
 
+
 \title{Simulación Numérica de \\ Ecuaciones Diferenciales Estocásticas}
 \date{3 de julio de 2017}
 \author{Lucio Santi - \texttt{lsanti\at dc.uba.ar}}
@@ -66,6 +67,8 @@
 \newcommand{\Intt}[4]{\int_{#1}^{#2}{#3~\Dif{#4}}}
 \newcommand{\IntB}[1]{\int_0^t{#1~\Dif{B}}}
 \newcommand{\IntBu}[1]{\int_0^t{#1~\Dif{B(u)}}}
+\newcommand{\Der}[2]{\frac{\partial}{\partial #2}~{#1}}
+\newcommand{\DerT}[2]{\frac{\partial^2}{\partial {#2}^2}~{#1}}
 
 
 \begin{document}
@@ -131,7 +134,7 @@
 
 \frame
 {
-    \frametitle{Aproximaciones de tiempo discreto}
+    \frametitle{Discretización temporal}
 
     \begin{itemize}
         \item Existen distintas estrategias de resolución numérica de EDSs.
@@ -144,19 +147,36 @@
     {
         \begin{block}{Discretización temporal}
         Una \textbf{discretización} del intervalo $[t_0, T]$ viene dada por 
-        $N$ instantes
+        $N+1$ instantes
         $$t_0 = \tau_0 < \tau_1 < \dots < \tau_N = T$$
         \end{block}
     }
 
         \begin{itemize}
-            \item<3-> $h_n = \tau_{n+1} - \tau_n$ es el $n$-ésimo incremento.
+            \item<3-> $h_n = \tau_{n+1} - \tau_n$ es el $n$-ésimo incremento (o paso).
             \item<4-> En las discretizaciones de tiempo equidistante, se toma $h = h_n = \frac{T - t_0}{N}$
             con $N$ suficientemente grande para que $0 < h < 1$.
             \uncover<5->{$\Rightarrow$ $\tau_n = t_0 + nh$}
         \end{itemize}
 }
 
+\frame
+{
+    \frametitle{Aproximaciones de tiempo discreto}
+
+    \begin{block}{Aproximación de tiempo discreto}
+    Dada una discretización temporal como antes, una \textbf{aproximación de tiempo discreto}
+    del proceso de Itô $\{X(t), t_0 \leq t \leq T\}$ es un proceso continuo
+    $\{X^h(t), t_0 \leq t \leq T \}$ evaluado en los instantes $\tau_n$ e interpolado
+    linealmente entre ellos.
+    \end{block}    
+
+    \begin{itemize}
+        \item<2-> Lógicamente, se busca que $X^h_n = X^h(\tau_n)$ aproxime el valor de $X(\tau_n)$.
+        \item<3-> En lo que sigue veremos cómo definir esquemas numéricos para este
+        propósito.
+    \end{itemize}
+}
 
 %%%%
 
@@ -164,19 +184,114 @@
 
 \subsection{Generalidades}
 
-% definiciones generales
-% estabilidad y convergencia
+\frame
+{
+    \frametitle{Derivación de esquemas numéricos}
+
+    \begin{itemize}
+        \item Los métodos numéricos para resolver EDSs siguen una dinámica similar a los
+        métodos tradicionales para resolver EDOs.
+        \item A modo de (breve) repaso, dada una EDO
+        $$\dot{x}(t) = f(t, x(t))$$
+        el método más sencillo de resolución es el \textbf{método de Euler}.
+        \item<2-> Si consideramos la expansión de Taylor de $x$ alrededor de $t$,
+        \begin{eqnarray*}
+            x(t + h) &=& x(t) + \dot{x}(t) ~h + \frac{\ddot{x}(t)}{2} h^2 + \dots \\
+                    \uncover<3->{&\approx& x(t) + f(t, x(t)) ~h}
+        \end{eqnarray*}
+        \item<4-> Luego, dada una discretización temporal $\tau_0,\dots,\tau_N$ de paso $h$,
+        el método de Euler viene dado por
+        $$x^h_{n+1} = x^h_n + f(\tau_n, x^h_n) ~ h$$
+    \end{itemize}
+}
+
+\frame
+{
+    \frametitle{Expansión de Itô - Taylor}
+
+    \begin{itemize}
+        \item En EDSs la derivación de los métodos viene dada por la \textbf{expansión de Itô - Taylor}.
+        \item<2-> Dado un proceso de Itô $\{X(t), t_0 \leq t \leq T\}$ y $f$ dos veces continuamente diferenciable,
+        por la fórmula de Itô se tiene
+        \uncover<2->{
+        \begin{eqnarray*}
+        f(X(t)) &=& f(X(t_0))  \\ \\
+        &+& \Intt{t_0}{t}{\onslide<3-> \underbrace{ \onslide<2-> \left[a(X(s))~ f'(X(s)) + \frac{1}{2}b^2(X(s))~ f''(X(s)) \right] \onslide<3-> }_{L^0 f} \onslide<2->}{s} \\
+        &+& \Intt{t_0}{t}{\onslide<3-> \underbrace{ \onslide<2-> b(X(s)) ~f'(X(s)) \onslide<3-> }_{L^1 f} \onslide<2->}{B(s)} 
+        \end{eqnarray*}
+        }
+    \end{itemize}
+}
+
+\frame[plain]
+{
+    \frametitle{Expansión de Itô - Taylor (cont.)}
+
+    Suponiendo que $a$ y $b$ son dos veces continuamente diferenciables,
+    por la aplicación de la fórmula de Itô sobre ambas,\vspace*{0.8cm}
+    
+    \begin{beamercolorbox}[wd=1.02\textwidth,ht=2.7cm,rounded=true]{blockbg}
+    \small{
+    \begin{eqnarray*}
+        X(t) &=& X(t_0) \\
+             &+& \Intt{t_0}{t}{\left[a(X(t_0)) + \Intt{t_0}{s}{L^0 a(X(u))}{u} + \Intt{0}{s}{L^1 a(X(u))}{B(u)} \right]}{s} \\
+             &+& \Intt{t_0}{t}{\left[b(X(t_0)) + \Intt{t_0}{s}{L^0 b(X(u))}{u} + \Intt{0}{s}{L^1 b(X(u))}{B(u)} \right]}{B(s)}
+    \end{eqnarray*}}
+    \end{beamercolorbox}
+}
+
+\frame
+{
+    \frametitle{Expansión de Itô - Taylor (cont.)}
+
+    Luego, \vspace*{0.2cm}
+
+    \begin{beamercolorbox}[wd=1.02\textwidth,ht=0.7cm,rounded=true]{blockbg}
+    $$X(t) = X(t_0) + a(X(t_0)) ~h + b(X(t_0)) ~\Delta B + R(t)$$
+    \end{beamercolorbox}
+
+    donde
+    \begin{itemize}
+        \item $h = t - t_0$,
+        \item $\Delta B = B(t) - B(t_0)$, y
+        \item $R(t)$ es el \textbf{resto}, compuesto por las integrales dobles que surgen al distribuir las integrales
+        externas sobre sus respectivas sumas. 
+    \end{itemize}
+
+    Los esquemas numéricos para resolver EDSs surgen del truncamiento de esta expansión en distintos
+    puntos, aplicando sucesivas veces la fórmula de Itô sobre $a$, $b$, $L^0 a$, $L^0 b$, $L^1 a$, $\dots$. 
+}
+
+\frame
+{
+    \frametitle{Propiedades de un esquema numérico}
+}
+
+\frame
+{
+    \frametitle{Tipos de convergencia}
+}
 
 \subsection{Método de Euler-Maruyama}
 
-% repaso euler determinístico
-% definición
-% propiedades
-% alguna prueba de estabilidad/convergencia?
+\frame
+{
+    \frametitle{Método de Euler-Maruyama}
+}
+
+\frame
+{
+    \frametitle{Euler-Maruyama: propiedades}
+}
+
+\frame
+{
+    \frametitle{Euler-Maruyama: convergencia fuerte}
+}
+
 
 \subsection{Método de Milstein}
 
-% derivación (expansión ito-taylor) => definición
 % propiedades
 
 
