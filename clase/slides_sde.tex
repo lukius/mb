@@ -62,6 +62,7 @@
 \metroset{block=fill}
 \setbeamertemplate{itemize subitem}[triangle]
 
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
 \newcommand{\Real}{\mathbb{R}}
 \newcommand{\Dif}[1]{d #1}
 \newcommand{\Intt}[4]{\int_{#1}^{#2}{#3~\Dif{#4}}}
@@ -69,6 +70,7 @@
 \newcommand{\IntBu}[1]{\int_0^t{#1~\Dif{B(u)}}}
 \newcommand{\Der}[2]{\frac{\partial}{\partial #2}~{#1}}
 \newcommand{\DerT}[2]{\frac{\partial^2}{\partial {#2}^2}~{#1}}
+\newcommand{\Exp}[1]{\ensuremath{\mathbb{E} #1}}
 
 
 \begin{document}
@@ -234,8 +236,8 @@
     \small{
     \begin{eqnarray*}
         X(t) &=& X(t_0) \\
-             &+& \Intt{t_0}{t}{\left[a(X(t_0)) + \Intt{t_0}{s}{L^0 a(X(u))}{u} + \Intt{0}{s}{L^1 a(X(u))}{B(u)} \right]}{s} \\
-             &+& \Intt{t_0}{t}{\left[b(X(t_0)) + \Intt{t_0}{s}{L^0 b(X(u))}{u} + \Intt{0}{s}{L^1 b(X(u))}{B(u)} \right]}{B(s)}
+             &+& \Intt{t_0}{t}{\left[a(X(t_0)) + \Intt{t_0}{s}{L^0 a(X(u))}{u} + \Intt{t_0}{s}{L^1 a(X(u))}{B(u)} \right]}{s} \\
+             &+& \Intt{t_0}{t}{\left[b(X(t_0)) + \Intt{t_0}{s}{L^0 b(X(u))}{u} + \Intt{t_0}{s}{L^1 b(X(u))}{B(u)} \right]}{B(s)}
     \end{eqnarray*}}
     \end{beamercolorbox}
 }
@@ -259,17 +261,69 @@
     \end{itemize}
 
     Los esquemas numéricos para resolver EDSs surgen del truncamiento de esta expansión en distintos
-    puntos, aplicando sucesivas veces la fórmula de Itô sobre $a$, $b$, $L^0 a$, $L^0 b$, $L^1 a$, $\dots$. 
+    puntos, aplicando sucesivas veces la fórmula de Itô sobre $a$, $b$, $L^0 a$, $L^0 b$, $L^1 a$, $\dots$ 
+    (suponiendo que $a$ y $b$ son suficientemente suaves). 
 }
 
 \frame
 {
     \frametitle{Propiedades de un esquema numérico}
+
+     Para que un esquema numérico resulte útil, es deseable que sea
+
+    \begin{itemize}
+        \item<2-> \textbf{Convergente}: la solución computada numéricamente
+        se aproxima a la solución exacta cuando el paso $h$ tiende a cero.
+
+        \item<3-> \textbf{Consistente}: el error de truncamiento tiende a cero
+        con $h$ (es una condición necesaria para la convergencia).
+
+        \item<4-> \textbf{Numéricamente estable}: los errores de propagación
+        se mantienen acotados.
+    \end{itemize}
 }
 
 \frame
 {
-    \frametitle{Tipos de convergencia}
+    \frametitle{Convergencia en EDSs}
+
+    En el caso estocástico se distinguen dos tipos de convergencia, 
+    dependiendo del escenario de aplicación del método numérico:
+
+    \begin{itemize}
+        \item<2-> \textbf{Convergencia fuerte}, cuando se desea que 
+        la aproximación de tiempo discreto $X^h$ provea una buena estimación de los caminos
+        muestrales del proceso $X$. 
+
+        \item<3-> \textbf{Convergencia débil}, cuando se busca que
+        $X^h$ provea una buena estimación de la distribución de $X$.
+    \end{itemize}
+}
+
+\frame
+{
+    \frametitle{Convergencia fuerte y débil}
+
+    \uncover<1->
+    {
+        \begin{block}{Convergencia fuerte de orden $\beta$}
+            La aproximación de tiempo discreto $X^h$ \textbf{converge fuertemente a $X$ con orden $\beta > 0$} 
+            en tiempo $T$ si existe una constante $C > 0$ tal que
+            $$\Exp{\abs{X(T) - X^h(T)}} \leq C \, h^{\beta}$$
+        \end{block}
+    }
+
+    \uncover<2->
+    {
+        \begin{block}{Convergencia débil de orden $\beta$}
+            La aproximación de tiempo discreto $X^h$ \textbf{converge débilmente a $X$ con orden $\beta > 0$} 
+            en tiempo $T$ si existe una constante $C > 0$ tal que
+            $$\Exp{\abs{g(X(T)) - g(X^h(T))}} \leq C \, h^{\beta}$$
+            para toda función $g \in \mathcal{C}^{2(\beta+1)}_{p}$ ($g$ y sus $2(\beta+1)$ derivadas 
+            tienen crecimiento polinomial)
+        \end{block}
+    }
+
 }
 
 \subsection{Método de Euler-Maruyama}
@@ -277,11 +331,47 @@
 \frame
 {
     \frametitle{Método de Euler-Maruyama}
+
+    El \textbf{método de Euler-Maruyama} es el análogo del método de Euler para
+    las EDSs.  Viene dado por el truncamiento de la expansión de Itô - Taylor
+    luego de la primera iteración:
+
+    \begin{eqnarray*}
+        \uncover<2->{X(t) &=& X(t_0) + a(X(t_0)) ~h + b(X(t_0)) ~\Delta B + R(t) \\}
+        \uncover<3->{    &\approx& X(t_0) + a(X(t_0)) ~h + b(X(t_0)) ~\Delta B}
+    \end{eqnarray*}
+
+    \uncover<4->
+    {
+        Luego, \vspace*{0.2cm}
+
+        \begin{beamercolorbox}[wd=1.02\textwidth,ht=0.7cm,rounded=true]{blockbg}
+        $$X^h_{n+1} = X^h_n + a(X^h_n) ~h + b(X^h_n) ~\Delta B^h_n$$
+        \end{beamercolorbox}
+
+        donde $\Delta B^h_n = B^h(\tau_{n+1}) - B^h(\tau_n)$ es el $n$-ésimo incremento
+        de una aproximación de tiempo discreto del browniano $B$.
+    }
 }
 
 \frame
 {
     \frametitle{Euler-Maruyama: propiedades}
+
+    El método de Euler-Maruyama tiene (al menos) las siguientes propiedades:
+
+    \begin{itemize}
+        \item<2-> Converge fuertemente con orden $\beta = \frac{1}{2}$
+        cuando $a$ y $b$ son Lipschitz y poseen crecimiento lineal (hipótesis usuales para
+        probar existencia y unicidad de soluciones fuertes).
+
+        \item<3-> Converge débilmente con orden $\beta = 1$ cuando $a, b \in \mathcal{C}^{2(\beta+1)}_p$.
+
+        \item<4-> Es numéricamente estable bajo las hipótesis usuales de existencia y unicidad
+        de soluciones fuertes.
+    \end{itemize}
+
+    \uncover<5->{En lo que sigue vamos a probar la convergencia fuerte del método.}
 }
 
 \frame
