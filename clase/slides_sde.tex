@@ -72,6 +72,7 @@
 \newcommand{\Der}[2]{\frac{\partial}{\partial #2}~{#1}}
 \newcommand{\DerT}[2]{\frac{\partial^2}{\partial {#2}^2}~{#1}}
 \newcommand{\Exp}[1]{\ensuremath{\mathbb{E} #1}}
+\newcommand{\ExpT}[1]{\ensuremath{\mathbb{E}^2 #1}}
 
 
 \begin{document}
@@ -378,8 +379,110 @@
 \frame
 {
     \frametitle{Euler-Maruyama: convergencia fuerte}
+
+    \begin{block}{Teorema}
+    Sea $\{X(t), t_0 \leq t \leq T\}$ un proceso de Itô (autónomo) y $\{X^h(t), t_0 \leq t \leq T\}$
+    la aproximación de tiempo discreto de paso $h = \frac{T-t_0}{N} < 1$ dada por el método de Euler-Maruyama.
+    Si los coeficientes de deriva $a$ y difusión $b$ de $X$ son tales
+    \begin{itemize}
+        \item $\abs{a(x) - a(y)} \leq K \abs{x-y}$,
+        \item $\abs{b(x) - b(y)} \leq K \abs{x-y}$, y
+        \item $\abs{a(x)} + \abs{b(x)} \leq K (1 + \abs{x})$
+    \end{itemize}
+    para cierta constante $K$ y para cualquier $x, y \in \Real$ y $t \in [t_0, T]$, entonces
+    existe una constante $C$ tal que
+    $$\Exp{\abs{X(T) - X^h(T)}} \leq C \, h^{\sfrac{1}{2}}$$
+    \end{block}
 }
 
+\frame[plain]
+{
+    \frametitle{Euler-Maruyama: convergencia fuerte (cont.)}
+
+    \textbf{Demostración.} Sea
+    $$\tilde{X}^h(t) = X(t_0) + \sum_{n : \tau_n \leq t}{\Intt{\tau_{n-1}}{\tau_n}{a(\tilde{X}^h(s))}{s} + \Intt{\tau_{n-1}}{\tau_n}{b(\tilde{X}^h(s))}{B(s)}}$$
+    la extensión constante de a trozos de $\{X^h_n = X^h(\tau_n)\}$ (i.e., el proceso que vale $X^h_{n-1}$ para todo $t \in [\tau_{n-1}, \tau_n)$).
+    \uncover<2-> {    
+    Dado $t \in [\tau_n, \tau_{n+1})$,}
+    \vspace{-0.05cm}
+    \begin{eqnarray*}
+        \uncover<2->{X(t) - \tilde{X}^h(t) &=& \left[X(t_0) + \Intt{t_0}{t}{a(X(s))}{s} + \Intt{t_0}{t}{b(X(s))}{B(s)} \right]  \\
+            &-& \left[ X(t_0) + \sum_{n : \tau_n \leq t}{\Intt{\tau_{n-1}}{\tau_n}{a(\tilde{X}^h(s))}{s} + \Intt{\tau_{n-1}}{\tau_n}{b(\tilde{X}^h(s))}{B(s)}} \right]} \\
+        \uncover<3->{&=& \onslide<4-> \underbrace{ \onslide<3-> \Intt{\tau_n}{t}{a(X(s))}{s} + \Intt{t_0}{\tau_n}{a(X(s)) - a(\tilde{X}^h(s))}{s} \onslide<4-> }_{a_1(t)} \onslide<3->  \\
+                     &+& \onslide<4-> \underbrace{ \onslide<3-> \Intt{\tau_n}{t}{b(X(s))}{B(s)} + \Intt{t_0}{\tau_n}{b(X(s)) - b(\tilde{X}^h(s))}{B(s)} \onslide<4-> }_{b_1(t)} \onslide<3->  }
+    \end{eqnarray*}
+}
+
+\frame[plain]
+{
+    \frametitle{Euler-Maruyama: convergencia fuerte (cont.)}
+
+    Observemos que
+
+    $$\Exp{\left[ a_1(t) + b_1(t) \right]^2} \leq 2 ~\Exp{a_1^2(t)} + 2 ~\Exp{b_1^2(t)}$$
+
+    \uncover<2->
+    {
+    Entonces,
+
+    \begin{eqnarray*}
+        Z(t) = \sup_{s \leq t} ~\Exp{\left[X(s) - \tilde{X}^h(s) \right]^2} \uncover<3->{&=& \sup_{s \leq t} ~\Exp{\left[a_1(s) + b_1(s) \right]^2}}\\
+        \uncover<4->{ &\leq& \sup_{s \leq t} ~ 2 ~\Exp{a_1^2(s)} + 2 ~\Exp{b_1^2(s)} } \\
+        \uncover<5->{ &=& 2 ~ 
+        \onslide<6-> \underbrace{ \onslide<5-> \sup_{s \leq t} ~ \Exp{a_1^2(s)} \onslide<6-> }_{A(t)} \onslide<5->  + 2 ~
+        \onslide<6-> \underbrace{ \onslide<5-> \sup_{s \leq t} ~ \Exp{b_1^2(s)} \onslide<6-> }_{B(t)} \onslide<5-> \\ }
+    \end{eqnarray*}
+    }
+}
+
+\frame[plain]
+{
+    \frametitle{Euler-Maruyama: convergencia fuerte (cont.)}
+    
+    Además, para $s \in [\tau_n, \tau_{n+1})$, \vspace*{-0.5cm}
+    
+    \begin{eqnarray*}
+        \Exp{a_1^2(s)} &\leq& 2~\Exp{\left[ \Intt{\tau_n}{s}{\abs{a(X(u))}}{u} \right]^2} + 2~\Exp{\left[ \Intt{t_0}{s}{\abs{a(X(u)) - a(\tilde{X}^h(u))}}{u} \right]^2} \\
+        \uncover<2->{&\leq& 2K^2 ~\Exp{\left[ \Intt{\tau_n}{s}{1 + \abs{X(u)}}{u} \right]^2} + 2K^2 ~\Exp{\left[ \Intt{t_0}{s}{\abs{X(u) - \tilde{X}^h(u)}}{u} \right]^2}  } \\
+        \uncover<3->{&\leq& 2K^2 ~\Exp{ \Intt{\tau_n}{s}{(1 + \abs{X(u)})^2}{u} } + 2K^2 Nh ~\Exp{ \Intt{t_0}{s}{\abs{X(u) - \tilde{X}^h(u)}^2}{u} }} \\
+        \uncover<4->{&\leq& 4K^2(L+1)h + 2K^2  Nh ~ \Intt{t_0}{s}{Z(u)}{u}  } 
+    \end{eqnarray*}
+
+    \uncover<5->{
+    donde el tercer paso sigue de la desigualdad de Cauchy-Schwarz y el cuarto de \vspace*{-0.5cm}
+
+    \begin{eqnarray*}
+        \Exp{\Intt{\tau_n}{s}{(1 + \abs{X(u)})^2}{u}} &\leq&  2~\Exp{\Intt{\tau_n}{s}{1}{u}} + 2~\Exp{\Intt{\tau_n}{s}{X^2(u)}{u}} \\
+        &\leq& 2(L+1)h
+    \end{eqnarray*}
+
+    \vspace{-0.2cm}
+    siendo $L = \sup_{u \leq T} ~\Exp{X^2(u)}$}
+}
+
+\frame[plain]
+{
+    \frametitle{Euler-Maruyama: convergencia fuerte (cont.)}
+
+    Por la isometría de Itô, la misma cota es válida para $\Exp{b_1^2(s)}$. \uncover<2->{Entonces, \vspace{-0.4cm}}
+    
+    \begin{eqnarray*}
+        \uncover<2->{Z(t) &\leq& 2A(t) + 2B(t)} \\
+        \uncover<3->{&\leq& 16K^2(L+1)h + 8K^2  Nh ~ \Intt{t_0}{t}{Z(u)}{u}} \\
+        \uncover<4->{&=& C_1 \, h + C_2 \Intt{t_0}{t}{Z(u)}{u}}
+    \end{eqnarray*}
+    \uncover<5-> {
+    Por el Lema de Grönwall, entonces, \vspace{-0.3cm}
+    $$Z(t) \leq (C_1 \, h) ~ e^{C_2 (t-t_0)} \leq C_3 \, h$$
+    }
+    \uncover<6-> {
+    Pero \vspace{-0.4cm}}
+    $$\uncover<6->{\ExpT{\abs{\tilde{X}^h(T) - X(T)}} \leq \Exp{\abs{\tilde{X}^h(T) - X(T)}^2}} \uncover<7->{\leq Z(T) } \uncover<8->{\leq C_3 \, h}$$
+    \uncover<9->{
+    Y finalmente,\vspace{-0.2cm}}
+    $$\uncover<9->{\Exp{\abs{X^h(T) - X(T)}}} \uncover<10->{= \Exp{\abs{\tilde{X}^h(T) - X(T)}}} \uncover<11->{\leq C_4 \, h^{\sfrac{1}{2}}}$$
+
+}
 
 \subsection{Método de Milstein}
 
