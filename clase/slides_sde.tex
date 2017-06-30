@@ -17,6 +17,7 @@
 \usepackage[export]{adjustbox}
 \usepackage{xcolor}
 \usepackage{color}
+\usepackage{xfrac}
 \usepgfplotslibrary{dateplot}
 
 \usepackage{xspace}
@@ -365,7 +366,7 @@
         cuando $a$ y $b$ son Lipschitz y poseen crecimiento lineal (hipótesis usuales para
         probar existencia y unicidad de soluciones fuertes).
 
-        \item<3-> Converge débilmente con orden $\beta = 1$ cuando $a, b \in \mathcal{C}^{2(\beta+1)}_p$.
+        \item<3-> Converge débilmente con orden $\beta = 1$ cuando $a, b \in \mathcal{C}^4_p$.
 
         \item<4-> Es numéricamente estable bajo las hipótesis usuales de existencia y unicidad
         de soluciones fuertes.
@@ -382,7 +383,99 @@
 
 \subsection{Método de Milstein}
 
-% propiedades
+\frame
+{
+    \frametitle{Método de Milstein: derivación}
+
+    Consideremos en la expansión de Itô - Taylor el término
+
+    $$\Intt{t_0}{t}{\Intt{t_0}{s}{L^1 b(X(u))}{B(u)}}{B(s)} $$
+
+    \uncover<2->
+    {
+    Aplicando la fórmula de Itô nuevamente,
+
+    \small{
+    \begin{eqnarray*}
+        && \hspace{-1.3cm}
+        \Intt{t_0}{t}{\Intt{t_0}{s}{ \left[ L^1 b(X(t_0)) + \Intt{t_0}{u}{L^0 L^1 b(X(z))}{z} + \Intt{t_0}{u}{L^1 L^1 b(X(z)))}{B(z)} \right] }{B(u)}}{B(s)} \\
+        \uncover<3->{&=& L^1 b(X(t_0)) ~ \Intt{t_0}{t}{\Intt{t_0}{s}{}{B(u)}}{B(s)} + \tilde{R}(t)} \\
+        \uncover<4->{&=& b(X(t_0))~ b'(X(t_0)) ~ \Intt{t_0}{t}{\Intt{t_0}{s}{}{B(u)}}{B(s)} + \tilde{R}(t)} \\
+    \end{eqnarray*}}
+    }
+}
+
+\frame
+{
+    \frametitle{Método de Milstein: derivación (cont.)}
+
+    Desarrollemos ahora 
+
+    \begin{eqnarray*}
+        \Intt{t_0}{t}{\Intt{t_0}{s}{}{B(u)}}{B(s)} \uncover<2->{&=& \Intt{t_0}{t}{B(s) - B(t_0)}{B(s)}} \\
+        \uncover<3->{&=& \Intt{t_0}{t}{B(s)}{B(s)} - B(t_0)(B(t) - B(t_0))} \\ 
+        \uncover<4->{&=& \frac{B^2(t) - B^2(t_0)}{2} - \frac{t - t_0}{2} - B(t_0)(B(t) - B(t_0))} \\ 
+        \uncover<5->{&=& \frac{\left(B(t) - B(t_0)\right)^2}{2} - \frac{t - t_0}{2}} \\ 
+        \uncover<6->{&=& \sfrac{1}{2} ~ (\Delta B^2 - h)} \\ 
+    \end{eqnarray*}
+}
+
+\frame
+{
+    \frametitle{Método de Milstein}
+
+    En consecuencia, notando $X(t_0) = X_0$, \vspace{-0.5cm}
+
+    \begin{eqnarray*}
+        \uncover<2->{X(t) &=& X_0 + a(X_0) ~h + b(X_0) ~\Delta B + \sfrac{1}{2} b(X_0) b'(X_0) \left[\Delta B^2 - h\right] + \tilde{R}(t) \\}
+        \uncover<3->{    &\approx& X_0 + a(X_0) ~h + b(X_0) ~\Delta B + \sfrac{1}{2} b(X_0) b'(X_0) \left[\Delta B^2 - h\right]}
+    \end{eqnarray*}
+
+    \uncover<4->
+    {
+        Esto da origen al \textbf{método de Milstein}, \vspace*{0.2cm}
+
+        \begin{beamercolorbox}[wd=1.02\textwidth,ht=0.82cm,rounded=true]{blockbg}
+        $$ \vspace{-0.2cm}
+        X^h_{n+1} = X^h_n + a(X^h_n) ~h + b(X^h_n) ~\Delta B^h_n +  \sfrac{1}{2} b(X^h_n) b'(X^h_n) \left[\Delta {B^h_n}^2 - h\right]
+        $$
+        \end{beamercolorbox}
+
+        donde $\Delta B^h_n = B^h(\tau_{n+1}) - B^h(\tau_n)$ es el $n$-ésimo incremento
+        de una aproximación de tiempo discreto del browniano $B$.
+    }
+}
+
+\frame
+{
+    \frametitle{Método de Milstein: propiedades}
+
+    El método de Milstein tiene (al menos) las siguientes propiedades:
+
+    \begin{itemize}
+        \item<2-> Converge fuertemente con orden $\beta = 1$
+        cuando $a, b$ son $\mathcal{C}^2$ (además de las hipótesis
+        usuales de existencia y unicidad de soluciones fuertes).
+
+        \item<3-> Converge débilmente con orden $\beta = 1$ cuando $a, b \in \mathcal{C}^4_p$.
+
+    \end{itemize}
+}
+
+\frame
+{
+    \frametitle{Otros métodos}
+
+    \begin{itemize}
+        \item Existen muchos otros métodos con mejores órdenes de convergencia (fuerte y débil).
+        \item Generalmente, las aproximaciones son más precisas al abarcar más
+        términos de las integrales estocásticas en la expansión de Itô - Taylor.
+        \item Éstas contienen más información de los caminos muestrales del movimiento browniano
+        sobre los subintervalos de discretización.
+        \item Existen también esquemas del estilo Runge-Kutta que evitan el cálculo de
+        las derivadas de los coeficientes de deriva y difusión.
+    \end{itemize}
+}
 
 
 %%%% 
