@@ -320,7 +320,7 @@
         \begin{block}{Convergencia débil de orden $\beta$}
             La aproximación de tiempo discreto $X^h$ \textbf{converge débilmente a $X$ con orden $\beta > 0$} 
             en tiempo $T$ si existe una constante $C > 0$ tal que
-            $$\Exp{\abs{g(X(T)) - g(X^h(T))}} \leq C \, h^{\beta}$$
+            $$\abs{\Exp{g(X(T))} - \Exp{g(X^h(T))}} \leq C \, h^{\beta}$$
             para toda función $g \in \mathcal{C}^{2(\beta+1)}_{p}$ ($g$ y sus $2(\beta+1)$ derivadas 
             tienen crecimiento polinomial)
         \end{block}
