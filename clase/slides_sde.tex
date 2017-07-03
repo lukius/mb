@@ -428,7 +428,7 @@
     \begin{eqnarray*}
         Z(t) = \sup_{s \leq t} ~\Exp{\left[X(s) - \tilde{X}^h(s) \right]^2} \uncover<3->{&=& \sup_{s \leq t} ~\Exp{\left[a_1(s) + b_1(s) \right]^2}}\\
         \uncover<4->{ &\leq& \sup_{s \leq t} ~ 2 ~\Exp{a_1^2(s)} + 2 ~\Exp{b_1^2(s)} } \\
-        \uncover<5->{ &=& 2 ~ 
+        \uncover<5->{ &\leq& 2 ~ 
         \onslide<6-> \underbrace{ \onslide<5-> \sup_{s \leq t} ~ \Exp{a_1^2(s)} \onslide<6-> }_{A(t)} \onslide<5->  + 2 ~
         \onslide<6-> \underbrace{ \onslide<5-> \sup_{s \leq t} ~ \Exp{b_1^2(s)} \onslide<6-> }_{B(t)} \onslide<5-> \\ }
     \end{eqnarray*}
@@ -469,7 +469,7 @@
     \begin{eqnarray*}
         \uncover<2->{Z(t) &\leq& 2A(t) + 2B(t)} \\
         \uncover<3->{&\leq& 16K^2(L+1)h + 8K^2  Nh ~ \Intt{t_0}{t}{Z(u)}{u}} \\
-        \uncover<4->{&=& C_1 \, h + C_2 \Intt{t_0}{t}{Z(u)}{u}}
+        \uncover<4->{&\leq& C_1 \, h + C_2 \Intt{t_0}{t}{Z(u)}{u}}
     \end{eqnarray*}
     \uncover<5-> {
     Por el Lema de Grönwall, entonces, \vspace{-0.3cm}
