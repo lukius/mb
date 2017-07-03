@@ -18,11 +18,11 @@
 <h1>Simulación de Ecuaciones Diferenciales Estocásticas</h1>
 
 <ul>
-<li> Esta aplicación permite simular numéricamente una EDS de la forma $\\ \quad\quad\quad dX(t) = rX(t)(K - X(t)) + \beta X(t)~dB(t)$</li>
+<li> Esta aplicación permite simular numéricamente una EDS de la forma $\\ \quad\quad\quad dX(t) = rX(t)(K - X(t))~dt + \beta X(t)~dB(t)$</li>
 <li> Se usa por lo general para modelar la dinámica de una población de tamaño $X(t)$ en un entorno estocástico.</li>
 <li> $K > 0$ se llama <i>carrying capacity</i> del entorno, $r$ es una medida de la calidad del mismo y $\beta$ indica el ruido del sistema. El valor inicial $X(0)$ debe ser positivo. </li>
 <li> La simulación ocurre en el intervalo $[0, T]$ y utiliza una discretización de paso $h$.</li>
-<li> Es posible también graficar la media de $M$ caminos muestrales.</li>
+<li> Es posible también graficar el promedio de $M$ caminos muestrales.</li>
 <!--  <li> La solución analítica de la ecuación viene dada por $\\ \quad\quad\quad X(t) = \frac{\text{exp}\left((rK - \frac{1}{2}\beta^2)t + \beta B(t)\right)}{X(0)^{-1} + r ~\int_0^t{\text{exp}\left((rK - \frac{1}{2}\beta^2)s + \beta B(s)\right) ~ds}} $</li>-->
 </ul>
   
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 <td><button id="btn_sample">Graficar camino muestral</button></td>
-<td><button id="btn_avg">Graficar media</button></td>
+<td><button id="btn_avg">Graficar promedio</button></td>
 <td><button id="btn_err">Graficar error</button></td>
 </tr>
 </table>

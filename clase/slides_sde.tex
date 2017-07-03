@@ -585,15 +585,84 @@
 
 \section{Implementación y validación}
 
-% demo en vivo
-
 \subsection{Caso de estudio}
+
+\frame
+{
+    \frametitle{Validación empírica: caso de estudio}
+
+    \begin{itemize}
+        \item Se optó por simular numéricamente una EDS que suele utilizarse para modelar la dinámica de una
+        población en un entorno estocástico:\\
+        
+        \begin{beamercolorbox}[wd=1.02\textwidth,ht=0.6cm,rounded=true]{blockbg}
+        $$\vspace{-0.1cm} dX(t) = r\,X(t)(K - X(t))~dt + \beta X(t)~dB(t)$$
+        \end{beamercolorbox}
+        \uncover<2->{en donde}
+        \begin{itemize}
+            \item<2-> $K > 0$ es la \textsl{carrying capacity} del entorno (i.e., la cantidad de personas
+            que pueden ser soportadas sin incurrir en un daño ambiental),
+            \item<3-> $r$ es una medida de la calidad del entorno, y
+            \item<4-> $\beta$ indica el ruido del sistema.
+        \end{itemize}        
+
+        \item<5-> La solución analítica viene dada por\\
+        \uncover<5->{
+       \begin{beamercolorbox}[wd=1.02\textwidth,ht=1.2cm,rounded=true]{blockbg}
+        $$X(t) = \frac{\text{exp}\left((rK - \frac{1}{2}\beta^2)t + \beta B(t)\right)}{X(0)^{-1} + r ~\Intt{0}{t}{\text{exp}\left((rK - \frac{1}{2}\beta^2)s + \beta B(s)\right)}{s}}$$
+        \end{beamercolorbox}
+    }
+    \end{itemize}
+}
+
 
 \subsection{Resultados}
 
-%%%% 
+\frame
+{
+    \frametitle{Resultado: camino muestral}
+
+    \begin{center}
+    \begin{figure}[h!]
+    \centerline{
+        \includegraphics[width=\textwidth]{images/sample_path.png}
+    }
+        \caption{Caminos muestrales de Euler-Maruyama, Milstein y solución analítica ($r = X(0) = \sfrac{1}{2}$, $K = \beta = 2$, $h = 10^{-2}$)}
+    \end{figure}
+    \end{center}
+}
+
+\frame
+{
+    \frametitle{Resultado: error en función del paso $h$}
+
+    \begin{center}
+    \begin{figure}[h!]
+    \centerline{
+        \includegraphics[width=\textwidth]{images/error.png}
+    }
+        \caption{Error promedio de los métodos frente a la solución analítica luego de $M = 200$ simulaciones ($r = X(0) = \sfrac{1}{2}$, $K = \beta = 2$)}
+    \end{figure}
+    \end{center}
+}
 
 \section{Conclusiones}
+
+\frame
+{
+    \frametitle{Conclusiones}
+
+    \begin{itemize}
+        \item Se analizaron dos métodos numéricos para resolver ecuaciones diferenciales estocásticas: 
+        \textbf{Euler-Maruyama} y \textbf{Milstein}.
+        \item Probamos la convergencia fuerte con orden $\sfrac{1}{2}$ del primero y enunciamos
+        otras propiedades de convergencia y estabilidad, en particular 
+        la convergencia fuerte con un orden mayor ($1$) del segundo.
+        \item Estudiamos empíricamente los métodos a partir de una EDS de dinámica poblacional
+        y comprobamos no sólo que ambos aproximan en forma adecuada la solución sino además que
+        Milstein brinda una aproximación más precisa, corroborando lo predicho por la teoría. 
+    \end{itemize}
+}
 
 
 
