@@ -59,7 +59,7 @@
                       Universidad de Buenos Aires
 }
 
-\setbeamertemplate{frame footer}{Simulación numérica de EDSs - Lucio Santi}
+\setbeamertemplate{frame footer}{Simulación numérica de EDEs - Lucio Santi}
 \metroset{block=fill}
 \setbeamertemplate{itemize subitem}[triangle]
 
@@ -95,13 +95,13 @@
     \frametitle{Motivación}
 
     \begin{itemize}
-        \item Las \textbf{ecuaciones diferenciales estocásticas} (EDSs) son ecuaciones diferenciales 
+        \item Las \textbf{ecuaciones diferenciales estocásticas} (EDEs) son ecuaciones diferenciales 
         en las que al menos uno de sus términos es un proceso estocástico.
         \item Surgen como mecanismo de modelado
         en contextos diversos (e.g., biología, astronomía, finanzas y otros).
         \item Típicamente es difícil (sino imposible) encontrar soluciones analíticas.
         \item Por ende, es fundamental la aproximación de soluciones mediante \textbf{simulación numérica}.
-        \item En esta exposición vamos a estudiar dos métodos numéricos de resolución de EDSs y algunas 
+        \item En esta exposición vamos a estudiar dos métodos numéricos de resolución de EDEs y algunas 
         de sus propiedades teóricas.
     \end{itemize}   
 }
@@ -141,7 +141,7 @@
     \frametitle{Discretización temporal}
 
     \begin{itemize}
-        \item Existen distintas estrategias de resolución numérica de EDSs.
+        \item Existen distintas estrategias de resolución numérica de EDEs.
         \item La más eficiente y generalmente aplicable consiste en simular
         caminos muestrales (\textsl{sample paths}) mediante \textbf{aproximaciones 
         de tiempo discreto}.
@@ -193,7 +193,7 @@
     \frametitle{Derivación de esquemas numéricos}
 
     \begin{itemize}
-        \item Los métodos numéricos para resolver EDSs siguen una dinámica similar a los
+        \item Los métodos numéricos para resolver EDEs siguen una dinámica similar a los
         métodos tradicionales para resolver EDOs.
         \item A modo de (breve) repaso, dada una EDO
         $$\dot{x}(t) = f(t, x(t))$$
@@ -214,7 +214,7 @@
     \frametitle{Expansión de Itô - Taylor}
 
     \begin{itemize}
-        \item En EDSs la derivación de los métodos viene dada por la \textbf{expansión de Itô - Taylor}.
+        \item En EDEs la derivación de los métodos viene dada por la \textbf{expansión de Itô - Taylor}.
         \item<2-> Dado un proceso de Itô $\{X(t), t_0 \leq t \leq T\}$ y $f$ dos veces continuamente diferenciable,
         por la fórmula de Itô se tiene
         \uncover<2->{
@@ -262,7 +262,7 @@
         externas sobre sus respectivas sumas. 
     \end{itemize}
 
-    Los esquemas numéricos para resolver EDSs surgen del truncamiento de esta expansión en distintos
+    Los esquemas numéricos para resolver EDEs surgen del truncamiento de esta expansión en distintos
     puntos, aplicando sucesivas veces la fórmula de Itô sobre $a$, $b$, $L^0 a$, $L^0 b$, $L^1 a$, $\dots$ 
     (suponiendo que $a$ y $b$ son suficientemente suaves). 
 }
@@ -287,7 +287,7 @@
 
 \frame
 {
-    \frametitle{Convergencia en EDSs}
+    \frametitle{Convergencia en EDEs}
 
     En el caso estocástico se distinguen dos tipos de convergencia, 
     dependiendo del escenario de aplicación del método numérico:
@@ -335,7 +335,7 @@
     \frametitle{Método de Euler-Maruyama}
 
     El \textbf{método de Euler-Maruyama} es el análogo del método de Euler para
-    las EDSs.  Viene dado por el truncamiento de la expansión de Itô - Taylor
+    las EDEs.  Viene dado por el truncamiento de la expansión de Itô - Taylor
     luego de la primera iteración:
 
     \begin{eqnarray*}
@@ -592,7 +592,7 @@
     \frametitle{Validación empírica: caso de estudio}
 
     \begin{itemize}
-        \item Se optó por simular numéricamente una EDS que suele utilizarse para modelar la dinámica de una
+        \item Se optó por simular numéricamente una EDE que suele utilizarse para modelar la dinámica de una
         población en un entorno estocástico:\\
         
         \begin{beamercolorbox}[wd=1.02\textwidth,ht=0.6cm,rounded=true]{blockbg}
@@ -658,7 +658,7 @@
         \item Probamos la convergencia fuerte con orden $\sfrac{1}{2}$ del primero y enunciamos
         otras propiedades de convergencia y estabilidad, en particular 
         la convergencia fuerte con un orden mayor ($1$) del segundo.
-        \item Estudiamos empíricamente los métodos a partir de una EDS de dinámica poblacional
+        \item Estudiamos empíricamente los métodos a partir de una EDE de dinámica poblacional
         y comprobamos no sólo que ambos aproximan en forma adecuada la solución sino además que
         Milstein brinda una aproximación más precisa, corroborando lo predicho por la teoría. 
     \end{itemize}
